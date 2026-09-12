@@ -1,0 +1,525 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: payment service
+
+Parameters:
+  AppEnvironment:
+    Type: String
+    Default: dev
+    Description: Deployment environment; every stage-scoped resource name is built from it
+  HttpApiId:
+    Type: String
+    Description: The project's shared HTTP API; this service attaches its routes to it
+  EnvDatabaseUrl:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: DATABASE_URL environment variable
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-shared"
+      Description: Shared utilities attached to every function
+      ContentUri: ../src/shared/nodejs
+      CompatibleRuntimes:
+        - nodejs20.x
+      RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: nodejs20.x
+
+  ListPaymentsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-listPayments"
+      CodeUri: ../
+      Handler: src/functions/payment/listPayments/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/listPayments/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetPaymentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getPayment"
+      CodeUri: ../
+      Handler: src/functions/payment/getPayment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/getPayment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CreatePaymentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-createPayment"
+      CodeUri: ../
+      Handler: src/functions/payment/createPayment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/createPayment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CapturePaymentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-capturePayment"
+      CodeUri: ../
+      Handler: src/functions/payment/capturePayment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/capturePayment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  RefundPaymentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-refundPayment"
+      CodeUri: ../
+      Handler: src/functions/payment/refundPayment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/refundPayment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetPaymentMethodsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getPaymentMethods"
+      CodeUri: ../
+      Handler: src/functions/payment/getPaymentMethods/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/getPaymentMethods/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  AddPaymentMethodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-addPaymentMethod"
+      CodeUri: ../
+      Handler: src/functions/payment/addPaymentMethod/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/addPaymentMethod/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  DeletePaymentMethodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-deletePaymentMethod"
+      CodeUri: ../
+      Handler: src/functions/payment/deletePaymentMethod/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/deletePaymentMethod/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  SetDefaultPaymentMethodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-setDefaultPaymentMethod"
+      CodeUri: ../
+      Handler: src/functions/payment/setDefaultPaymentMethod/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/setDefaultPaymentMethod/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  WebhookPaymentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-webhookPayment"
+      CodeUri: ../
+      Handler: src/functions/payment/webhookPayment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/payment/webhookPayment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ListPaymentsIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ListPaymentsFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ListPaymentsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /payment/listPayments"
+      Target: !Sub "integrations/${ListPaymentsIntegration}"
+
+  ListPaymentsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ListPaymentsFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetPaymentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetPaymentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetPaymentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /payment/getPayment"
+      Target: !Sub "integrations/${GetPaymentIntegration}"
+
+  GetPaymentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetPaymentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CreatePaymentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CreatePaymentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CreatePaymentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /payment/createPayment"
+      Target: !Sub "integrations/${CreatePaymentIntegration}"
+
+  CreatePaymentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CreatePaymentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CapturePaymentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CapturePaymentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CapturePaymentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /payment/capturePayment"
+      Target: !Sub "integrations/${CapturePaymentIntegration}"
+
+  CapturePaymentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CapturePaymentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  RefundPaymentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt RefundPaymentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  RefundPaymentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /payment/refundPayment"
+      Target: !Sub "integrations/${RefundPaymentIntegration}"
+
+  RefundPaymentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref RefundPaymentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetPaymentMethodsIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetPaymentMethodsFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetPaymentMethodsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /payment/getPaymentMethods"
+      Target: !Sub "integrations/${GetPaymentMethodsIntegration}"
+
+  GetPaymentMethodsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetPaymentMethodsFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  AddPaymentMethodIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt AddPaymentMethodFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  AddPaymentMethodRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /payment/addPaymentMethod"
+      Target: !Sub "integrations/${AddPaymentMethodIntegration}"
+
+  AddPaymentMethodPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref AddPaymentMethodFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  DeletePaymentMethodIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt DeletePaymentMethodFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  DeletePaymentMethodRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "DELETE /payment/deletePaymentMethod"
+      Target: !Sub "integrations/${DeletePaymentMethodIntegration}"
+
+  DeletePaymentMethodPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref DeletePaymentMethodFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  SetDefaultPaymentMethodIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt SetDefaultPaymentMethodFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  SetDefaultPaymentMethodRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "PUT /payment/setDefaultPaymentMethod"
+      Target: !Sub "integrations/${SetDefaultPaymentMethodIntegration}"
+
+  SetDefaultPaymentMethodPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref SetDefaultPaymentMethodFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  WebhookPaymentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt WebhookPaymentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  WebhookPaymentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /payment/webhookPayment"
+      Target: !Sub "integrations/${WebhookPaymentIntegration}"
+
+  WebhookPaymentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref WebhookPaymentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"

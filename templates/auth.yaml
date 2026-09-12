@@ -1,0 +1,770 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: auth service
+
+Parameters:
+  AppEnvironment:
+    Type: String
+    Default: dev
+    Description: Deployment environment; every stage-scoped resource name is built from it
+  HttpApiId:
+    Type: String
+    Description: The project's shared HTTP API; this service attaches its routes to it
+  EnvDatabaseUrl:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: DATABASE_URL environment variable
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-shared"
+      Description: Shared utilities attached to every function
+      ContentUri: ../src/shared/nodejs
+      CompatibleRuntimes:
+        - nodejs20.x
+      RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: nodejs20.x
+
+  LoginFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-login"
+      CodeUri: ../
+      Handler: src/functions/auth/login/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/login/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  RegisterFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-register"
+      CodeUri: ../
+      Handler: src/functions/auth/register/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/register/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  LogoutFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-logout"
+      CodeUri: ../
+      Handler: src/functions/auth/logout/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/logout/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  RefreshTokenFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-refreshToken"
+      CodeUri: ../
+      Handler: src/functions/auth/refreshToken/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/refreshToken/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ForgotPasswordFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-forgotPassword"
+      CodeUri: ../
+      Handler: src/functions/auth/forgotPassword/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/forgotPassword/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ResetPasswordFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-resetPassword"
+      CodeUri: ../
+      Handler: src/functions/auth/resetPassword/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/resetPassword/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  VerifyEmailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-verifyEmail"
+      CodeUri: ../
+      Handler: src/functions/auth/verifyEmail/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/verifyEmail/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ChangePasswordFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-changePassword"
+      CodeUri: ../
+      Handler: src/functions/auth/changePassword/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/changePassword/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetMeFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getMe"
+      CodeUri: ../
+      Handler: src/functions/auth/getMe/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/getMe/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  SocialLoginFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-socialLogin"
+      CodeUri: ../
+      Handler: src/functions/auth/socialLogin/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/socialLogin/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  Enable2faFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-enable2fa"
+      CodeUri: ../
+      Handler: src/functions/auth/enable2fa/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/enable2fa/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  Verify2faFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-verify2fa"
+      CodeUri: ../
+      Handler: src/functions/auth/verify2fa/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/verify2fa/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  Disable2faFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-disable2fa"
+      CodeUri: ../
+      Handler: src/functions/auth/disable2fa/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/disable2fa/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetSessionsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getSessions"
+      CodeUri: ../
+      Handler: src/functions/auth/getSessions/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/getSessions/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  RevokeSessionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-revokeSession"
+      CodeUri: ../
+      Handler: src/functions/auth/revokeSession/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/auth/revokeSession/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  LoginIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt LoginFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  LoginRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/login"
+      Target: !Sub "integrations/${LoginIntegration}"
+
+  LoginPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref LoginFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  RegisterIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt RegisterFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  RegisterRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/register"
+      Target: !Sub "integrations/${RegisterIntegration}"
+
+  RegisterPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref RegisterFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  LogoutIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt LogoutFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  LogoutRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/logout"
+      Target: !Sub "integrations/${LogoutIntegration}"
+
+  LogoutPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref LogoutFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  RefreshTokenIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt RefreshTokenFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  RefreshTokenRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/refreshToken"
+      Target: !Sub "integrations/${RefreshTokenIntegration}"
+
+  RefreshTokenPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref RefreshTokenFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ForgotPasswordIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ForgotPasswordFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ForgotPasswordRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/forgotPassword"
+      Target: !Sub "integrations/${ForgotPasswordIntegration}"
+
+  ForgotPasswordPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ForgotPasswordFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ResetPasswordIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ResetPasswordFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ResetPasswordRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/resetPassword"
+      Target: !Sub "integrations/${ResetPasswordIntegration}"
+
+  ResetPasswordPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ResetPasswordFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  VerifyEmailIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt VerifyEmailFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  VerifyEmailRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/verifyEmail"
+      Target: !Sub "integrations/${VerifyEmailIntegration}"
+
+  VerifyEmailPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref VerifyEmailFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ChangePasswordIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ChangePasswordFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ChangePasswordRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "PUT /auth/changePassword"
+      Target: !Sub "integrations/${ChangePasswordIntegration}"
+
+  ChangePasswordPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ChangePasswordFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetMeIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetMeFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetMeRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /auth/getMe"
+      Target: !Sub "integrations/${GetMeIntegration}"
+
+  GetMePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetMeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  SocialLoginIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt SocialLoginFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  SocialLoginRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/socialLogin"
+      Target: !Sub "integrations/${SocialLoginIntegration}"
+
+  SocialLoginPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref SocialLoginFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  Enable2faIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt Enable2faFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  Enable2faRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/enable2fa"
+      Target: !Sub "integrations/${Enable2faIntegration}"
+
+  Enable2faPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Enable2faFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  Verify2faIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt Verify2faFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  Verify2faRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/verify2fa"
+      Target: !Sub "integrations/${Verify2faIntegration}"
+
+  Verify2faPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Verify2faFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  Disable2faIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt Disable2faFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  Disable2faRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /auth/disable2fa"
+      Target: !Sub "integrations/${Disable2faIntegration}"
+
+  Disable2faPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Disable2faFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetSessionsIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetSessionsFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetSessionsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /auth/getSessions"
+      Target: !Sub "integrations/${GetSessionsIntegration}"
+
+  GetSessionsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetSessionsFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  RevokeSessionIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt RevokeSessionFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  RevokeSessionRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "DELETE /auth/revokeSession"
+      Target: !Sub "integrations/${RevokeSessionIntegration}"
+
+  RevokeSessionPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref RevokeSessionFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"

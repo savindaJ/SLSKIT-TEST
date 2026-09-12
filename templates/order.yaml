@@ -1,0 +1,574 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: order service
+
+Parameters:
+  AppEnvironment:
+    Type: String
+    Default: dev
+    Description: Deployment environment; every stage-scoped resource name is built from it
+  HttpApiId:
+    Type: String
+    Description: The project's shared HTTP API; this service attaches its routes to it
+  EnvDatabaseUrl:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: DATABASE_URL environment variable
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-shared"
+      Description: Shared utilities attached to every function
+      ContentUri: ../src/shared/nodejs
+      CompatibleRuntimes:
+        - nodejs20.x
+      RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: nodejs20.x
+
+  ListOrdersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-listOrders"
+      CodeUri: ../
+      Handler: src/functions/order/listOrders/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/listOrders/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getOrder"
+      CodeUri: ../
+      Handler: src/functions/order/getOrder/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/getOrder/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CreateOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-createOrder"
+      CodeUri: ../
+      Handler: src/functions/order/createOrder/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/createOrder/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CancelOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-cancelOrder"
+      CodeUri: ../
+      Handler: src/functions/order/cancelOrder/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/cancelOrder/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  UpdateOrderStatusFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-updateOrderStatus"
+      CodeUri: ../
+      Handler: src/functions/order/updateOrderStatus/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/updateOrderStatus/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetOrderItemsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getOrderItems"
+      CodeUri: ../
+      Handler: src/functions/order/getOrderItems/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/getOrderItems/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetOrderTimelineFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getOrderTimeline"
+      CodeUri: ../
+      Handler: src/functions/order/getOrderTimeline/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/getOrderTimeline/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ReorderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-reorder"
+      CodeUri: ../
+      Handler: src/functions/order/reorder/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/reorder/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetOrderInvoiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getOrderInvoice"
+      CodeUri: ../
+      Handler: src/functions/order/getOrderInvoice/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/getOrderInvoice/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  DownloadOrderInvoiceFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-downloadOrderInvoice"
+      CodeUri: ../
+      Handler: src/functions/order/downloadOrderInvoice/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/downloadOrderInvoice/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ConfirmOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-confirmOrder"
+      CodeUri: ../
+      Handler: src/functions/order/confirmOrder/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/order/confirmOrder/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ListOrdersIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ListOrdersFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ListOrdersRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /order/listOrders"
+      Target: !Sub "integrations/${ListOrdersIntegration}"
+
+  ListOrdersPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ListOrdersFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetOrderIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetOrderFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetOrderRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /order/getOrder"
+      Target: !Sub "integrations/${GetOrderIntegration}"
+
+  GetOrderPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetOrderFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CreateOrderIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CreateOrderFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CreateOrderRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /order/createOrder"
+      Target: !Sub "integrations/${CreateOrderIntegration}"
+
+  CreateOrderPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CreateOrderFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CancelOrderIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CancelOrderFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CancelOrderRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /order/cancelOrder"
+      Target: !Sub "integrations/${CancelOrderIntegration}"
+
+  CancelOrderPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CancelOrderFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  UpdateOrderStatusIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt UpdateOrderStatusFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  UpdateOrderStatusRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "PUT /order/updateOrderStatus"
+      Target: !Sub "integrations/${UpdateOrderStatusIntegration}"
+
+  UpdateOrderStatusPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref UpdateOrderStatusFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetOrderItemsIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetOrderItemsFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetOrderItemsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /order/getOrderItems"
+      Target: !Sub "integrations/${GetOrderItemsIntegration}"
+
+  GetOrderItemsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetOrderItemsFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetOrderTimelineIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetOrderTimelineFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetOrderTimelineRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /order/getOrderTimeline"
+      Target: !Sub "integrations/${GetOrderTimelineIntegration}"
+
+  GetOrderTimelinePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetOrderTimelineFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ReorderIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ReorderFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ReorderRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /order/reorder"
+      Target: !Sub "integrations/${ReorderIntegration}"
+
+  ReorderPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ReorderFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetOrderInvoiceIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetOrderInvoiceFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetOrderInvoiceRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /order/getOrderInvoice"
+      Target: !Sub "integrations/${GetOrderInvoiceIntegration}"
+
+  GetOrderInvoicePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetOrderInvoiceFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  DownloadOrderInvoiceIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt DownloadOrderInvoiceFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  DownloadOrderInvoiceRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /order/downloadOrderInvoice"
+      Target: !Sub "integrations/${DownloadOrderInvoiceIntegration}"
+
+  DownloadOrderInvoicePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref DownloadOrderInvoiceFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ConfirmOrderIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ConfirmOrderFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ConfirmOrderRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /order/confirmOrder"
+      Target: !Sub "integrations/${ConfirmOrderIntegration}"
+
+  ConfirmOrderPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ConfirmOrderFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"

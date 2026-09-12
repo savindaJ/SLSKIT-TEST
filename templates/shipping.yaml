@@ -1,0 +1,525 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: shipping service
+
+Parameters:
+  AppEnvironment:
+    Type: String
+    Default: dev
+    Description: Deployment environment; every stage-scoped resource name is built from it
+  HttpApiId:
+    Type: String
+    Description: The project's shared HTTP API; this service attaches its routes to it
+  EnvDatabaseUrl:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: DATABASE_URL environment variable
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-shared"
+      Description: Shared utilities attached to every function
+      ContentUri: ../src/shared/nodejs
+      CompatibleRuntimes:
+        - nodejs20.x
+      RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: nodejs20.x
+
+  ListShippingMethodsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-listShippingMethods"
+      CodeUri: ../
+      Handler: src/functions/shipping/listShippingMethods/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/listShippingMethods/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetShippingMethodFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getShippingMethod"
+      CodeUri: ../
+      Handler: src/functions/shipping/getShippingMethod/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/getShippingMethod/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CalculateShippingFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-calculateShipping"
+      CodeUri: ../
+      Handler: src/functions/shipping/calculateShipping/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/calculateShipping/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CreateShipmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-createShipment"
+      CodeUri: ../
+      Handler: src/functions/shipping/createShipment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/createShipment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetShipmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getShipment"
+      CodeUri: ../
+      Handler: src/functions/shipping/getShipment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/getShipment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  TrackShipmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-trackShipment"
+      CodeUri: ../
+      Handler: src/functions/shipping/trackShipment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/trackShipment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  UpdateShipmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-updateShipment"
+      CodeUri: ../
+      Handler: src/functions/shipping/updateShipment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/updateShipment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CancelShipmentFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-cancelShipment"
+      CodeUri: ../
+      Handler: src/functions/shipping/cancelShipment/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/cancelShipment/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ListShippingZonesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-listShippingZones"
+      CodeUri: ../
+      Handler: src/functions/shipping/listShippingZones/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/listShippingZones/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CreateShippingZoneFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-createShippingZone"
+      CodeUri: ../
+      Handler: src/functions/shipping/createShippingZone/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/shipping/createShippingZone/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ListShippingMethodsIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ListShippingMethodsFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ListShippingMethodsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /shipping/listShippingMethods"
+      Target: !Sub "integrations/${ListShippingMethodsIntegration}"
+
+  ListShippingMethodsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ListShippingMethodsFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetShippingMethodIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetShippingMethodFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetShippingMethodRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /shipping/getShippingMethod"
+      Target: !Sub "integrations/${GetShippingMethodIntegration}"
+
+  GetShippingMethodPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetShippingMethodFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CalculateShippingIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CalculateShippingFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CalculateShippingRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /shipping/calculateShipping"
+      Target: !Sub "integrations/${CalculateShippingIntegration}"
+
+  CalculateShippingPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CalculateShippingFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CreateShipmentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CreateShipmentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CreateShipmentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /shipping/createShipment"
+      Target: !Sub "integrations/${CreateShipmentIntegration}"
+
+  CreateShipmentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CreateShipmentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetShipmentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetShipmentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetShipmentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /shipping/getShipment"
+      Target: !Sub "integrations/${GetShipmentIntegration}"
+
+  GetShipmentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetShipmentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  TrackShipmentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt TrackShipmentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  TrackShipmentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /shipping/trackShipment"
+      Target: !Sub "integrations/${TrackShipmentIntegration}"
+
+  TrackShipmentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref TrackShipmentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  UpdateShipmentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt UpdateShipmentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  UpdateShipmentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "PUT /shipping/updateShipment"
+      Target: !Sub "integrations/${UpdateShipmentIntegration}"
+
+  UpdateShipmentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref UpdateShipmentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CancelShipmentIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CancelShipmentFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CancelShipmentRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /shipping/cancelShipment"
+      Target: !Sub "integrations/${CancelShipmentIntegration}"
+
+  CancelShipmentPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CancelShipmentFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ListShippingZonesIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ListShippingZonesFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ListShippingZonesRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /shipping/listShippingZones"
+      Target: !Sub "integrations/${ListShippingZonesIntegration}"
+
+  ListShippingZonesPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ListShippingZonesFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CreateShippingZoneIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CreateShippingZoneFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CreateShippingZoneRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /shipping/createShippingZone"
+      Target: !Sub "integrations/${CreateShippingZoneIntegration}"
+
+  CreateShippingZonePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CreateShippingZoneFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"

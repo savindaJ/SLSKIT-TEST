@@ -1,0 +1,427 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: coupon service
+
+Parameters:
+  AppEnvironment:
+    Type: String
+    Default: dev
+    Description: Deployment environment; every stage-scoped resource name is built from it
+  HttpApiId:
+    Type: String
+    Description: The project's shared HTTP API; this service attaches its routes to it
+  EnvDatabaseUrl:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: DATABASE_URL environment variable
+
+Globals:
+  Function:
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  SharedLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: !Sub "${AWS::StackName}-shared"
+      Description: Shared utilities attached to every function
+      ContentUri: ../src/shared/nodejs
+      CompatibleRuntimes:
+        - nodejs20.x
+      RetentionPolicy: Retain
+    Metadata:
+      BuildMethod: nodejs20.x
+
+  ListCouponsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-listCoupons"
+      CodeUri: ../
+      Handler: src/functions/coupon/listCoupons/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/listCoupons/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetCouponFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getCoupon"
+      CodeUri: ../
+      Handler: src/functions/coupon/getCoupon/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/getCoupon/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  CreateCouponFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-createCoupon"
+      CodeUri: ../
+      Handler: src/functions/coupon/createCoupon/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/createCoupon/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  UpdateCouponFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-updateCoupon"
+      CodeUri: ../
+      Handler: src/functions/coupon/updateCoupon/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/updateCoupon/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  DeleteCouponFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-deleteCoupon"
+      CodeUri: ../
+      Handler: src/functions/coupon/deleteCoupon/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/deleteCoupon/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ValidateCouponFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-validateCoupon"
+      CodeUri: ../
+      Handler: src/functions/coupon/validateCoupon/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/validateCoupon/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ApplyCouponFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-applyCoupon"
+      CodeUri: ../
+      Handler: src/functions/coupon/applyCoupon/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/applyCoupon/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  GetCouponUsageFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "test-cli-${AppEnvironment}-getCouponUsage"
+      CodeUri: ../
+      Handler: src/functions/coupon/getCouponUsage/handler.handler
+      Runtime: nodejs20.x
+      MemorySize: 128
+      Environment:
+        Variables:
+          APP_ENVIRONMENT: !Ref AppEnvironment
+          DATABASE_URL: !Ref EnvDatabaseUrl
+      Layers:
+        - !Ref SharedLayer
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: es2020
+        Sourcemap: true
+        EntryPoints:
+          - src/functions/coupon/getCouponUsage/handler.ts
+        External:
+          - "/opt/nodejs/*"
+
+  ListCouponsIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ListCouponsFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ListCouponsRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /coupon/listCoupons"
+      Target: !Sub "integrations/${ListCouponsIntegration}"
+
+  ListCouponsPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ListCouponsFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetCouponIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetCouponFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetCouponRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /coupon/getCoupon"
+      Target: !Sub "integrations/${GetCouponIntegration}"
+
+  GetCouponPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetCouponFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  CreateCouponIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt CreateCouponFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  CreateCouponRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /coupon/createCoupon"
+      Target: !Sub "integrations/${CreateCouponIntegration}"
+
+  CreateCouponPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref CreateCouponFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  UpdateCouponIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt UpdateCouponFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  UpdateCouponRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "PUT /coupon/updateCoupon"
+      Target: !Sub "integrations/${UpdateCouponIntegration}"
+
+  UpdateCouponPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref UpdateCouponFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  DeleteCouponIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt DeleteCouponFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  DeleteCouponRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "DELETE /coupon/deleteCoupon"
+      Target: !Sub "integrations/${DeleteCouponIntegration}"
+
+  DeleteCouponPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref DeleteCouponFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ValidateCouponIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ValidateCouponFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ValidateCouponRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /coupon/validateCoupon"
+      Target: !Sub "integrations/${ValidateCouponIntegration}"
+
+  ValidateCouponPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ValidateCouponFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  ApplyCouponIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt ApplyCouponFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  ApplyCouponRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "POST /coupon/applyCoupon"
+      Target: !Sub "integrations/${ApplyCouponIntegration}"
+
+  ApplyCouponPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ApplyCouponFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"
+
+  GetCouponUsageIntegration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref HttpApiId
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt GetCouponUsageFunction.Arn
+      PayloadFormatVersion: "2.0"
+
+  GetCouponUsageRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref HttpApiId
+      RouteKey: "GET /coupon/getCouponUsage"
+      Target: !Sub "integrations/${GetCouponUsageIntegration}"
+
+  GetCouponUsagePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref GetCouponUsageFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApiId}/*/*"

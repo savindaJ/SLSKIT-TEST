@@ -1,0 +1,5211 @@
+{
+  "name": "test-cli",
+  "version": "0.1.0",
+  "generatedBy": "slskit",
+  "runtime": {
+    "id": "typescript",
+    "lambda": "nodejs20.x"
+  },
+  "framework": {
+    "id": "sam",
+    "files": {
+      "root": "template.yaml",
+      "application": "template.yaml",
+      "applications": []
+    }
+  },
+  "database": {
+    "id": "prisma",
+    "enabled": true
+  },
+  "functions": {
+    "memorySize": 128
+  },
+  "apiGateway": {
+    "enabled": true,
+    "name": "test-cli-http-api",
+    "type": "HttpApi",
+    "perService": false,
+    "templates": [
+      "template.yaml"
+    ],
+    "attachAllFunctions": true,
+    "routes": [
+      {
+        "path": "/auth/login",
+        "method": "POST",
+        "function": "auth.login"
+      },
+      {
+        "path": "/auth/register",
+        "method": "POST",
+        "function": "auth.register"
+      },
+      {
+        "path": "/auth/logout",
+        "method": "POST",
+        "function": "auth.logout"
+      },
+      {
+        "path": "/auth/refreshToken",
+        "method": "POST",
+        "function": "auth.refreshToken"
+      },
+      {
+        "path": "/auth/forgotPassword",
+        "method": "POST",
+        "function": "auth.forgotPassword"
+      },
+      {
+        "path": "/auth/resetPassword",
+        "method": "POST",
+        "function": "auth.resetPassword"
+      },
+      {
+        "path": "/auth/verifyEmail",
+        "method": "POST",
+        "function": "auth.verifyEmail"
+      },
+      {
+        "path": "/auth/changePassword",
+        "method": "PUT",
+        "function": "auth.changePassword"
+      },
+      {
+        "path": "/auth/getMe",
+        "method": "GET",
+        "function": "auth.getMe"
+      },
+      {
+        "path": "/auth/socialLogin",
+        "method": "POST",
+        "function": "auth.socialLogin"
+      },
+      {
+        "path": "/auth/enable2fa",
+        "method": "POST",
+        "function": "auth.enable2fa"
+      },
+      {
+        "path": "/auth/verify2fa",
+        "method": "POST",
+        "function": "auth.verify2fa"
+      },
+      {
+        "path": "/auth/disable2fa",
+        "method": "POST",
+        "function": "auth.disable2fa"
+      },
+      {
+        "path": "/auth/getSessions",
+        "method": "GET",
+        "function": "auth.getSessions"
+      },
+      {
+        "path": "/auth/revokeSession",
+        "method": "DELETE",
+        "function": "auth.revokeSession"
+      },
+      {
+        "path": "/products",
+        "method": "GET",
+        "function": "product.getProducts"
+      },
+      {
+        "path": "/products",
+        "method": "POST",
+        "function": "product.createProduct"
+      },
+      {
+        "path": "/product/getProduct",
+        "method": "GET",
+        "function": "product.getProduct"
+      },
+      {
+        "path": "/product/updateProduct",
+        "method": "PUT",
+        "function": "product.updateProduct"
+      },
+      {
+        "path": "/product/deleteProduct",
+        "method": "DELETE",
+        "function": "product.deleteProduct"
+      },
+      {
+        "path": "/product/searchProducts",
+        "method": "GET",
+        "function": "product.searchProducts"
+      },
+      {
+        "path": "/product/getProductImages",
+        "method": "GET",
+        "function": "product.getProductImages"
+      },
+      {
+        "path": "/product/uploadProductImage",
+        "method": "POST",
+        "function": "product.uploadProductImage"
+      },
+      {
+        "path": "/product/getFeaturedProducts",
+        "method": "GET",
+        "function": "product.getFeaturedProducts"
+      },
+      {
+        "path": "/product/getRelatedProducts",
+        "method": "GET",
+        "function": "product.getRelatedProducts"
+      },
+      {
+        "path": "/product/getProductVariants",
+        "method": "GET",
+        "function": "product.getProductVariants"
+      },
+      {
+        "path": "/product/createProductVariant",
+        "method": "POST",
+        "function": "product.createProductVariant"
+      },
+      {
+        "path": "/product/updateProductVariant",
+        "method": "PUT",
+        "function": "product.updateProductVariant"
+      },
+      {
+        "path": "/product/deleteProductVariant",
+        "method": "DELETE",
+        "function": "product.deleteProductVariant"
+      },
+      {
+        "path": "/product/getProductStock",
+        "method": "GET",
+        "function": "product.getProductStock"
+      },
+      {
+        "path": "/product/publishProduct",
+        "method": "POST",
+        "function": "product.publishProduct"
+      },
+      {
+        "path": "/product/unpublishProduct",
+        "method": "POST",
+        "function": "product.unpublishProduct"
+      },
+      {
+        "path": "/category/listCategories",
+        "method": "GET",
+        "function": "category.listCategories"
+      },
+      {
+        "path": "/category/getCategory",
+        "method": "GET",
+        "function": "category.getCategory"
+      },
+      {
+        "path": "/category/createCategory",
+        "method": "POST",
+        "function": "category.createCategory"
+      },
+      {
+        "path": "/category/updateCategory",
+        "method": "PUT",
+        "function": "category.updateCategory"
+      },
+      {
+        "path": "/category/deleteCategory",
+        "method": "DELETE",
+        "function": "category.deleteCategory"
+      },
+      {
+        "path": "/category/getCategoryProducts",
+        "method": "GET",
+        "function": "category.getCategoryProducts"
+      },
+      {
+        "path": "/category/listSubcategories",
+        "method": "GET",
+        "function": "category.listSubcategories"
+      },
+      {
+        "path": "/category/createSubcategory",
+        "method": "POST",
+        "function": "category.createSubcategory"
+      },
+      {
+        "path": "/category/moveCategory",
+        "method": "PUT",
+        "function": "category.moveCategory"
+      },
+      {
+        "path": "/cart/getCart",
+        "method": "GET",
+        "function": "cart.getCart"
+      },
+      {
+        "path": "/cart/addToCart",
+        "method": "POST",
+        "function": "cart.addToCart"
+      },
+      {
+        "path": "/cart/updateCartItem",
+        "method": "PUT",
+        "function": "cart.updateCartItem"
+      },
+      {
+        "path": "/cart/removeCartItem",
+        "method": "DELETE",
+        "function": "cart.removeCartItem"
+      },
+      {
+        "path": "/cart/clearCart",
+        "method": "DELETE",
+        "function": "cart.clearCart"
+      },
+      {
+        "path": "/cart/applyCartCoupon",
+        "method": "POST",
+        "function": "cart.applyCartCoupon"
+      },
+      {
+        "path": "/cart/removeCartCoupon",
+        "method": "DELETE",
+        "function": "cart.removeCartCoupon"
+      },
+      {
+        "path": "/cart/getCartTotals",
+        "method": "GET",
+        "function": "cart.getCartTotals"
+      },
+      {
+        "path": "/cart/mergeCart",
+        "method": "POST",
+        "function": "cart.mergeCart"
+      },
+      {
+        "path": "/cart/saveForLater",
+        "method": "POST",
+        "function": "cart.saveForLater"
+      },
+      {
+        "path": "/cart/getSavedItems",
+        "method": "GET",
+        "function": "cart.getSavedItems"
+      },
+      {
+        "path": "/order/listOrders",
+        "method": "GET",
+        "function": "order.listOrders"
+      },
+      {
+        "path": "/order/getOrder",
+        "method": "GET",
+        "function": "order.getOrder"
+      },
+      {
+        "path": "/order/createOrder",
+        "method": "POST",
+        "function": "order.createOrder"
+      },
+      {
+        "path": "/order/cancelOrder",
+        "method": "POST",
+        "function": "order.cancelOrder"
+      },
+      {
+        "path": "/order/updateOrderStatus",
+        "method": "PUT",
+        "function": "order.updateOrderStatus"
+      },
+      {
+        "path": "/order/getOrderItems",
+        "method": "GET",
+        "function": "order.getOrderItems"
+      },
+      {
+        "path": "/order/getOrderTimeline",
+        "method": "GET",
+        "function": "order.getOrderTimeline"
+      },
+      {
+        "path": "/order/reorder",
+        "method": "POST",
+        "function": "order.reorder"
+      },
+      {
+        "path": "/order/getOrderInvoice",
+        "method": "GET",
+        "function": "order.getOrderInvoice"
+      },
+      {
+        "path": "/order/downloadOrderInvoice",
+        "method": "GET",
+        "function": "order.downloadOrderInvoice"
+      },
+      {
+        "path": "/order/confirmOrder",
+        "method": "POST",
+        "function": "order.confirmOrder"
+      },
+      {
+        "path": "/checkout/startCheckout",
+        "method": "POST",
+        "function": "checkout.startCheckout"
+      },
+      {
+        "path": "/checkout/getCheckout",
+        "method": "GET",
+        "function": "checkout.getCheckout"
+      },
+      {
+        "path": "/checkout/updateCheckout",
+        "method": "PUT",
+        "function": "checkout.updateCheckout"
+      },
+      {
+        "path": "/checkout/setCheckoutShipping",
+        "method": "POST",
+        "function": "checkout.setCheckoutShipping"
+      },
+      {
+        "path": "/checkout/setCheckoutPayment",
+        "method": "POST",
+        "function": "checkout.setCheckoutPayment"
+      },
+      {
+        "path": "/checkout/placeOrder",
+        "method": "POST",
+        "function": "checkout.placeOrder"
+      },
+      {
+        "path": "/checkout/validateCheckout",
+        "method": "POST",
+        "function": "checkout.validateCheckout"
+      },
+      {
+        "path": "/checkout/getCheckoutSummary",
+        "method": "GET",
+        "function": "checkout.getCheckoutSummary"
+      },
+      {
+        "path": "/checkout/applyCheckoutGiftCard",
+        "method": "POST",
+        "function": "checkout.applyCheckoutGiftCard"
+      },
+      {
+        "path": "/customer/getCustomer",
+        "method": "GET",
+        "function": "customer.getCustomer"
+      },
+      {
+        "path": "/customer/updateCustomer",
+        "method": "PUT",
+        "function": "customer.updateCustomer"
+      },
+      {
+        "path": "/customer/deleteCustomer",
+        "method": "DELETE",
+        "function": "customer.deleteCustomer"
+      },
+      {
+        "path": "/customer/listCustomers",
+        "method": "GET",
+        "function": "customer.listCustomers"
+      },
+      {
+        "path": "/customer/getCustomerOrders",
+        "method": "GET",
+        "function": "customer.getCustomerOrders"
+      },
+      {
+        "path": "/customer/getCustomerAddresses",
+        "method": "GET",
+        "function": "customer.getCustomerAddresses"
+      },
+      {
+        "path": "/customer/updateCustomerPreferences",
+        "method": "PUT",
+        "function": "customer.updateCustomerPreferences"
+      },
+      {
+        "path": "/customer/getCustomerProfile",
+        "method": "GET",
+        "function": "customer.getCustomerProfile"
+      },
+      {
+        "path": "/customer/deactivateCustomer",
+        "method": "POST",
+        "function": "customer.deactivateCustomer"
+      },
+      {
+        "path": "/inventory/getInventory",
+        "method": "GET",
+        "function": "inventory.getInventory"
+      },
+      {
+        "path": "/inventory/updateInventory",
+        "method": "PUT",
+        "function": "inventory.updateInventory"
+      },
+      {
+        "path": "/inventory/reserveStock",
+        "method": "POST",
+        "function": "inventory.reserveStock"
+      },
+      {
+        "path": "/inventory/releaseStock",
+        "method": "POST",
+        "function": "inventory.releaseStock"
+      },
+      {
+        "path": "/inventory/listLowStock",
+        "method": "GET",
+        "function": "inventory.listLowStock"
+      },
+      {
+        "path": "/inventory/adjustInventory",
+        "method": "POST",
+        "function": "inventory.adjustInventory"
+      },
+      {
+        "path": "/inventory/getInventoryHistory",
+        "method": "GET",
+        "function": "inventory.getInventoryHistory"
+      },
+      {
+        "path": "/inventory/syncInventory",
+        "method": "POST",
+        "function": "inventory.syncInventory"
+      },
+      {
+        "path": "/inventory/getWarehouseStock",
+        "method": "GET",
+        "function": "inventory.getWarehouseStock"
+      },
+      {
+        "path": "/review/listReviews",
+        "method": "GET",
+        "function": "review.listReviews"
+      },
+      {
+        "path": "/review/getReview",
+        "method": "GET",
+        "function": "review.getReview"
+      },
+      {
+        "path": "/review/createReview",
+        "method": "POST",
+        "function": "review.createReview"
+      },
+      {
+        "path": "/review/updateReview",
+        "method": "PUT",
+        "function": "review.updateReview"
+      },
+      {
+        "path": "/review/deleteReview",
+        "method": "DELETE",
+        "function": "review.deleteReview"
+      },
+      {
+        "path": "/review/approveReview",
+        "method": "POST",
+        "function": "review.approveReview"
+      },
+      {
+        "path": "/review/reportReview",
+        "method": "POST",
+        "function": "review.reportReview"
+      },
+      {
+        "path": "/review/getProductReviews",
+        "method": "GET",
+        "function": "review.getProductReviews"
+      },
+      {
+        "path": "/review/getReviewStats",
+        "method": "GET",
+        "function": "review.getReviewStats"
+      },
+      {
+        "path": "/payment/listPayments",
+        "method": "GET",
+        "function": "payment.listPayments"
+      },
+      {
+        "path": "/payment/getPayment",
+        "method": "GET",
+        "function": "payment.getPayment"
+      },
+      {
+        "path": "/payment/createPayment",
+        "method": "POST",
+        "function": "payment.createPayment"
+      },
+      {
+        "path": "/payment/capturePayment",
+        "method": "POST",
+        "function": "payment.capturePayment"
+      },
+      {
+        "path": "/payment/refundPayment",
+        "method": "POST",
+        "function": "payment.refundPayment"
+      },
+      {
+        "path": "/payment/getPaymentMethods",
+        "method": "GET",
+        "function": "payment.getPaymentMethods"
+      },
+      {
+        "path": "/payment/addPaymentMethod",
+        "method": "POST",
+        "function": "payment.addPaymentMethod"
+      },
+      {
+        "path": "/payment/deletePaymentMethod",
+        "method": "DELETE",
+        "function": "payment.deletePaymentMethod"
+      },
+      {
+        "path": "/payment/setDefaultPaymentMethod",
+        "method": "PUT",
+        "function": "payment.setDefaultPaymentMethod"
+      },
+      {
+        "path": "/payment/webhookPayment",
+        "method": "POST",
+        "function": "payment.webhookPayment"
+      },
+      {
+        "path": "/shipping/listShippingMethods",
+        "method": "GET",
+        "function": "shipping.listShippingMethods"
+      },
+      {
+        "path": "/shipping/getShippingMethod",
+        "method": "GET",
+        "function": "shipping.getShippingMethod"
+      },
+      {
+        "path": "/shipping/calculateShipping",
+        "method": "POST",
+        "function": "shipping.calculateShipping"
+      },
+      {
+        "path": "/shipping/createShipment",
+        "method": "POST",
+        "function": "shipping.createShipment"
+      },
+      {
+        "path": "/shipping/getShipment",
+        "method": "GET",
+        "function": "shipping.getShipment"
+      },
+      {
+        "path": "/shipping/trackShipment",
+        "method": "GET",
+        "function": "shipping.trackShipment"
+      },
+      {
+        "path": "/shipping/updateShipment",
+        "method": "PUT",
+        "function": "shipping.updateShipment"
+      },
+      {
+        "path": "/shipping/cancelShipment",
+        "method": "POST",
+        "function": "shipping.cancelShipment"
+      },
+      {
+        "path": "/shipping/listShippingZones",
+        "method": "GET",
+        "function": "shipping.listShippingZones"
+      },
+      {
+        "path": "/shipping/createShippingZone",
+        "method": "POST",
+        "function": "shipping.createShippingZone"
+      },
+      {
+        "path": "/coupon/listCoupons",
+        "method": "GET",
+        "function": "coupon.listCoupons"
+      },
+      {
+        "path": "/coupon/getCoupon",
+        "method": "GET",
+        "function": "coupon.getCoupon"
+      },
+      {
+        "path": "/coupon/createCoupon",
+        "method": "POST",
+        "function": "coupon.createCoupon"
+      },
+      {
+        "path": "/coupon/updateCoupon",
+        "method": "PUT",
+        "function": "coupon.updateCoupon"
+      },
+      {
+        "path": "/coupon/deleteCoupon",
+        "method": "DELETE",
+        "function": "coupon.deleteCoupon"
+      },
+      {
+        "path": "/coupon/validateCoupon",
+        "method": "POST",
+        "function": "coupon.validateCoupon"
+      },
+      {
+        "path": "/coupon/applyCoupon",
+        "method": "POST",
+        "function": "coupon.applyCoupon"
+      },
+      {
+        "path": "/coupon/getCouponUsage",
+        "method": "GET",
+        "function": "coupon.getCouponUsage"
+      },
+      {
+        "path": "/wishlist/getWishlist",
+        "method": "GET",
+        "function": "wishlist.getWishlist"
+      },
+      {
+        "path": "/wishlist/addToWishlist",
+        "method": "POST",
+        "function": "wishlist.addToWishlist"
+      },
+      {
+        "path": "/wishlist/removeFromWishlist",
+        "method": "DELETE",
+        "function": "wishlist.removeFromWishlist"
+      },
+      {
+        "path": "/wishlist/clearWishlist",
+        "method": "DELETE",
+        "function": "wishlist.clearWishlist"
+      },
+      {
+        "path": "/wishlist/moveWishlistToCart",
+        "method": "POST",
+        "function": "wishlist.moveWishlistToCart"
+      },
+      {
+        "path": "/wishlist/getWishlistCount",
+        "method": "GET",
+        "function": "wishlist.getWishlistCount"
+      },
+      {
+        "path": "/address/listAddresses",
+        "method": "GET",
+        "function": "address.listAddresses"
+      },
+      {
+        "path": "/address/getAddress",
+        "method": "GET",
+        "function": "address.getAddress"
+      },
+      {
+        "path": "/address/createAddress",
+        "method": "POST",
+        "function": "address.createAddress"
+      },
+      {
+        "path": "/address/updateAddress",
+        "method": "PUT",
+        "function": "address.updateAddress"
+      },
+      {
+        "path": "/address/deleteAddress",
+        "method": "DELETE",
+        "function": "address.deleteAddress"
+      },
+      {
+        "path": "/address/setDefaultAddress",
+        "method": "PUT",
+        "function": "address.setDefaultAddress"
+      },
+      {
+        "path": "/address/validateAddress",
+        "method": "POST",
+        "function": "address.validateAddress"
+      }
+    ]
+  },
+  "layer": {
+    "enabled": true,
+    "name": "test-cli-shared",
+    "path": "src/shared",
+    "source": "src/shared/nodejs",
+    "templates": [
+      "template.yaml"
+    ],
+    "compatibleRuntimes": [
+      "nodejs20.x"
+    ],
+    "attachAllFunctions": true,
+    "attachedTo": [
+      "auth.login",
+      "auth.register",
+      "auth.logout",
+      "auth.refreshToken",
+      "auth.forgotPassword",
+      "auth.resetPassword",
+      "auth.verifyEmail",
+      "auth.changePassword",
+      "auth.getMe",
+      "auth.socialLogin",
+      "auth.enable2fa",
+      "auth.verify2fa",
+      "auth.disable2fa",
+      "auth.getSessions",
+      "auth.revokeSession",
+      "product.getProducts",
+      "product.createProduct",
+      "product.getProduct",
+      "product.updateProduct",
+      "product.deleteProduct",
+      "product.searchProducts",
+      "product.getProductImages",
+      "product.uploadProductImage",
+      "product.getFeaturedProducts",
+      "product.getRelatedProducts",
+      "product.getProductVariants",
+      "product.createProductVariant",
+      "product.updateProductVariant",
+      "product.deleteProductVariant",
+      "product.getProductStock",
+      "product.publishProduct",
+      "product.unpublishProduct",
+      "category.listCategories",
+      "category.getCategory",
+      "category.createCategory",
+      "category.updateCategory",
+      "category.deleteCategory",
+      "category.getCategoryProducts",
+      "category.listSubcategories",
+      "category.createSubcategory",
+      "category.moveCategory",
+      "cart.getCart",
+      "cart.addToCart",
+      "cart.updateCartItem",
+      "cart.removeCartItem",
+      "cart.clearCart",
+      "cart.applyCartCoupon",
+      "cart.removeCartCoupon",
+      "cart.getCartTotals",
+      "cart.mergeCart",
+      "cart.saveForLater",
+      "cart.getSavedItems",
+      "order.listOrders",
+      "order.getOrder",
+      "order.createOrder",
+      "order.cancelOrder",
+      "order.updateOrderStatus",
+      "order.getOrderItems",
+      "order.getOrderTimeline",
+      "order.reorder",
+      "order.getOrderInvoice",
+      "order.downloadOrderInvoice",
+      "order.confirmOrder",
+      "checkout.startCheckout",
+      "checkout.getCheckout",
+      "checkout.updateCheckout",
+      "checkout.setCheckoutShipping",
+      "checkout.setCheckoutPayment",
+      "checkout.placeOrder",
+      "checkout.validateCheckout",
+      "checkout.getCheckoutSummary",
+      "checkout.applyCheckoutGiftCard",
+      "customer.getCustomer",
+      "customer.updateCustomer",
+      "customer.deleteCustomer",
+      "customer.listCustomers",
+      "customer.getCustomerOrders",
+      "customer.getCustomerAddresses",
+      "customer.updateCustomerPreferences",
+      "customer.getCustomerProfile",
+      "customer.deactivateCustomer",
+      "inventory.getInventory",
+      "inventory.updateInventory",
+      "inventory.reserveStock",
+      "inventory.releaseStock",
+      "inventory.listLowStock",
+      "inventory.adjustInventory",
+      "inventory.getInventoryHistory",
+      "inventory.syncInventory",
+      "inventory.getWarehouseStock",
+      "review.listReviews",
+      "review.getReview",
+      "review.createReview",
+      "review.updateReview",
+      "review.deleteReview",
+      "review.approveReview",
+      "review.reportReview",
+      "review.getProductReviews",
+      "review.getReviewStats",
+      "payment.listPayments",
+      "payment.getPayment",
+      "payment.createPayment",
+      "payment.capturePayment",
+      "payment.refundPayment",
+      "payment.getPaymentMethods",
+      "payment.addPaymentMethod",
+      "payment.deletePaymentMethod",
+      "payment.setDefaultPaymentMethod",
+      "payment.webhookPayment",
+      "shipping.listShippingMethods",
+      "shipping.getShippingMethod",
+      "shipping.calculateShipping",
+      "shipping.createShipment",
+      "shipping.getShipment",
+      "shipping.trackShipment",
+      "shipping.updateShipment",
+      "shipping.cancelShipment",
+      "shipping.listShippingZones",
+      "shipping.createShippingZone",
+      "coupon.listCoupons",
+      "coupon.getCoupon",
+      "coupon.createCoupon",
+      "coupon.updateCoupon",
+      "coupon.deleteCoupon",
+      "coupon.validateCoupon",
+      "coupon.applyCoupon",
+      "coupon.getCouponUsage",
+      "wishlist.getWishlist",
+      "wishlist.addToWishlist",
+      "wishlist.removeFromWishlist",
+      "wishlist.clearWishlist",
+      "wishlist.moveWishlistToCart",
+      "wishlist.getWishlistCount",
+      "address.listAddresses",
+      "address.getAddress",
+      "address.createAddress",
+      "address.updateAddress",
+      "address.deleteAddress",
+      "address.setDefaultAddress",
+      "address.validateAddress"
+    ]
+  },
+  "environments": {
+    "default": "dev",
+    "list": {
+      "dev": {
+        "stackName": "test-cli-dev"
+      }
+    }
+  },
+  "applications": [
+    {
+      "name": "auth",
+      "path": "src/functions/auth",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "auth.login",
+          "name": "login",
+          "path": "src/functions/auth/login",
+          "handlerFile": "src/functions/auth/login/handler.ts",
+          "handler": "src/functions/auth/login/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/login.ts",
+            "export": "login"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/login",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.register",
+          "name": "register",
+          "path": "src/functions/auth/register",
+          "handlerFile": "src/functions/auth/register/handler.ts",
+          "handler": "src/functions/auth/register/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/register.ts",
+            "export": "register"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/register",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.logout",
+          "name": "logout",
+          "path": "src/functions/auth/logout",
+          "handlerFile": "src/functions/auth/logout/handler.ts",
+          "handler": "src/functions/auth/logout/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/logout.ts",
+            "export": "logout"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/logout",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.refreshToken",
+          "name": "refreshToken",
+          "path": "src/functions/auth/refreshToken",
+          "handlerFile": "src/functions/auth/refreshToken/handler.ts",
+          "handler": "src/functions/auth/refreshToken/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/refreshToken.ts",
+            "export": "refreshToken"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/refreshToken",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.forgotPassword",
+          "name": "forgotPassword",
+          "path": "src/functions/auth/forgotPassword",
+          "handlerFile": "src/functions/auth/forgotPassword/handler.ts",
+          "handler": "src/functions/auth/forgotPassword/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/forgotPassword.ts",
+            "export": "forgotPassword"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/forgotPassword",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.resetPassword",
+          "name": "resetPassword",
+          "path": "src/functions/auth/resetPassword",
+          "handlerFile": "src/functions/auth/resetPassword/handler.ts",
+          "handler": "src/functions/auth/resetPassword/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/resetPassword.ts",
+            "export": "resetPassword"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/resetPassword",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.verifyEmail",
+          "name": "verifyEmail",
+          "path": "src/functions/auth/verifyEmail",
+          "handlerFile": "src/functions/auth/verifyEmail/handler.ts",
+          "handler": "src/functions/auth/verifyEmail/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/verifyEmail.ts",
+            "export": "verifyEmail"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/verifyEmail",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.changePassword",
+          "name": "changePassword",
+          "path": "src/functions/auth/changePassword",
+          "handlerFile": "src/functions/auth/changePassword/handler.ts",
+          "handler": "src/functions/auth/changePassword/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/changePassword.ts",
+            "export": "changePassword"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/changePassword",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.getMe",
+          "name": "getMe",
+          "path": "src/functions/auth/getMe",
+          "handlerFile": "src/functions/auth/getMe/handler.ts",
+          "handler": "src/functions/auth/getMe/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/getMe.ts",
+            "export": "getMe"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/getMe",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.socialLogin",
+          "name": "socialLogin",
+          "path": "src/functions/auth/socialLogin",
+          "handlerFile": "src/functions/auth/socialLogin/handler.ts",
+          "handler": "src/functions/auth/socialLogin/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/socialLogin.ts",
+            "export": "socialLogin"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/socialLogin",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.enable2fa",
+          "name": "enable2fa",
+          "path": "src/functions/auth/enable2fa",
+          "handlerFile": "src/functions/auth/enable2fa/handler.ts",
+          "handler": "src/functions/auth/enable2fa/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/enable2fa.ts",
+            "export": "enable2fa"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/enable2fa",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.verify2fa",
+          "name": "verify2fa",
+          "path": "src/functions/auth/verify2fa",
+          "handlerFile": "src/functions/auth/verify2fa/handler.ts",
+          "handler": "src/functions/auth/verify2fa/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/verify2fa.ts",
+            "export": "verify2fa"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/verify2fa",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.disable2fa",
+          "name": "disable2fa",
+          "path": "src/functions/auth/disable2fa",
+          "handlerFile": "src/functions/auth/disable2fa/handler.ts",
+          "handler": "src/functions/auth/disable2fa/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/disable2fa.ts",
+            "export": "disable2fa"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/disable2fa",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.getSessions",
+          "name": "getSessions",
+          "path": "src/functions/auth/getSessions",
+          "handlerFile": "src/functions/auth/getSessions/handler.ts",
+          "handler": "src/functions/auth/getSessions/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/getSessions.ts",
+            "export": "getSessions"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/getSessions",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "auth.revokeSession",
+          "name": "revokeSession",
+          "path": "src/functions/auth/revokeSession",
+          "handlerFile": "src/functions/auth/revokeSession/handler.ts",
+          "handler": "src/functions/auth/revokeSession/handler.handler",
+          "service": {
+            "application": "auth",
+            "path": "src/services/auth/revokeSession.ts",
+            "export": "revokeSession"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/auth/revokeSession",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "product",
+      "path": "src/functions/product",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "product.getProducts",
+          "name": "getProducts",
+          "path": "src/functions/product/getProducts",
+          "handlerFile": "src/functions/product/getProducts/handler.ts",
+          "handler": "src/functions/product/getProducts/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getProducts.ts",
+            "export": "getProducts"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/products",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.createProduct",
+          "name": "createProduct",
+          "path": "src/functions/product/createProduct",
+          "handlerFile": "src/functions/product/createProduct/handler.ts",
+          "handler": "src/functions/product/createProduct/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/createProduct.ts",
+            "export": "createProduct"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/products",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.getProduct",
+          "name": "getProduct",
+          "path": "src/functions/product/getProduct",
+          "handlerFile": "src/functions/product/getProduct/handler.ts",
+          "handler": "src/functions/product/getProduct/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getProduct.ts",
+            "export": "getProduct"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/getProduct",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.updateProduct",
+          "name": "updateProduct",
+          "path": "src/functions/product/updateProduct",
+          "handlerFile": "src/functions/product/updateProduct/handler.ts",
+          "handler": "src/functions/product/updateProduct/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/updateProduct.ts",
+            "export": "updateProduct"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/updateProduct",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.deleteProduct",
+          "name": "deleteProduct",
+          "path": "src/functions/product/deleteProduct",
+          "handlerFile": "src/functions/product/deleteProduct/handler.ts",
+          "handler": "src/functions/product/deleteProduct/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/deleteProduct.ts",
+            "export": "deleteProduct"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/deleteProduct",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.searchProducts",
+          "name": "searchProducts",
+          "path": "src/functions/product/searchProducts",
+          "handlerFile": "src/functions/product/searchProducts/handler.ts",
+          "handler": "src/functions/product/searchProducts/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/searchProducts.ts",
+            "export": "searchProducts"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/searchProducts",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.getProductImages",
+          "name": "getProductImages",
+          "path": "src/functions/product/getProductImages",
+          "handlerFile": "src/functions/product/getProductImages/handler.ts",
+          "handler": "src/functions/product/getProductImages/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getProductImages.ts",
+            "export": "getProductImages"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/getProductImages",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.uploadProductImage",
+          "name": "uploadProductImage",
+          "path": "src/functions/product/uploadProductImage",
+          "handlerFile": "src/functions/product/uploadProductImage/handler.ts",
+          "handler": "src/functions/product/uploadProductImage/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/uploadProductImage.ts",
+            "export": "uploadProductImage"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/uploadProductImage",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.getFeaturedProducts",
+          "name": "getFeaturedProducts",
+          "path": "src/functions/product/getFeaturedProducts",
+          "handlerFile": "src/functions/product/getFeaturedProducts/handler.ts",
+          "handler": "src/functions/product/getFeaturedProducts/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getFeaturedProducts.ts",
+            "export": "getFeaturedProducts"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/getFeaturedProducts",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.getRelatedProducts",
+          "name": "getRelatedProducts",
+          "path": "src/functions/product/getRelatedProducts",
+          "handlerFile": "src/functions/product/getRelatedProducts/handler.ts",
+          "handler": "src/functions/product/getRelatedProducts/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getRelatedProducts.ts",
+            "export": "getRelatedProducts"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/getRelatedProducts",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.getProductVariants",
+          "name": "getProductVariants",
+          "path": "src/functions/product/getProductVariants",
+          "handlerFile": "src/functions/product/getProductVariants/handler.ts",
+          "handler": "src/functions/product/getProductVariants/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getProductVariants.ts",
+            "export": "getProductVariants"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/getProductVariants",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.createProductVariant",
+          "name": "createProductVariant",
+          "path": "src/functions/product/createProductVariant",
+          "handlerFile": "src/functions/product/createProductVariant/handler.ts",
+          "handler": "src/functions/product/createProductVariant/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/createProductVariant.ts",
+            "export": "createProductVariant"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/createProductVariant",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.updateProductVariant",
+          "name": "updateProductVariant",
+          "path": "src/functions/product/updateProductVariant",
+          "handlerFile": "src/functions/product/updateProductVariant/handler.ts",
+          "handler": "src/functions/product/updateProductVariant/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/updateProductVariant.ts",
+            "export": "updateProductVariant"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/updateProductVariant",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.deleteProductVariant",
+          "name": "deleteProductVariant",
+          "path": "src/functions/product/deleteProductVariant",
+          "handlerFile": "src/functions/product/deleteProductVariant/handler.ts",
+          "handler": "src/functions/product/deleteProductVariant/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/deleteProductVariant.ts",
+            "export": "deleteProductVariant"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/deleteProductVariant",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.getProductStock",
+          "name": "getProductStock",
+          "path": "src/functions/product/getProductStock",
+          "handlerFile": "src/functions/product/getProductStock/handler.ts",
+          "handler": "src/functions/product/getProductStock/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/getProductStock.ts",
+            "export": "getProductStock"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/getProductStock",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.publishProduct",
+          "name": "publishProduct",
+          "path": "src/functions/product/publishProduct",
+          "handlerFile": "src/functions/product/publishProduct/handler.ts",
+          "handler": "src/functions/product/publishProduct/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/publishProduct.ts",
+            "export": "publishProduct"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/publishProduct",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "product.unpublishProduct",
+          "name": "unpublishProduct",
+          "path": "src/functions/product/unpublishProduct",
+          "handlerFile": "src/functions/product/unpublishProduct/handler.ts",
+          "handler": "src/functions/product/unpublishProduct/handler.handler",
+          "service": {
+            "application": "product",
+            "path": "src/services/product/unpublishProduct.ts",
+            "export": "unpublishProduct"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/product/unpublishProduct",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "category",
+      "path": "src/functions/category",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "category.listCategories",
+          "name": "listCategories",
+          "path": "src/functions/category/listCategories",
+          "handlerFile": "src/functions/category/listCategories/handler.ts",
+          "handler": "src/functions/category/listCategories/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/listCategories.ts",
+            "export": "listCategories"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/listCategories",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.getCategory",
+          "name": "getCategory",
+          "path": "src/functions/category/getCategory",
+          "handlerFile": "src/functions/category/getCategory/handler.ts",
+          "handler": "src/functions/category/getCategory/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/getCategory.ts",
+            "export": "getCategory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/getCategory",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.createCategory",
+          "name": "createCategory",
+          "path": "src/functions/category/createCategory",
+          "handlerFile": "src/functions/category/createCategory/handler.ts",
+          "handler": "src/functions/category/createCategory/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/createCategory.ts",
+            "export": "createCategory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/createCategory",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.updateCategory",
+          "name": "updateCategory",
+          "path": "src/functions/category/updateCategory",
+          "handlerFile": "src/functions/category/updateCategory/handler.ts",
+          "handler": "src/functions/category/updateCategory/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/updateCategory.ts",
+            "export": "updateCategory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/updateCategory",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.deleteCategory",
+          "name": "deleteCategory",
+          "path": "src/functions/category/deleteCategory",
+          "handlerFile": "src/functions/category/deleteCategory/handler.ts",
+          "handler": "src/functions/category/deleteCategory/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/deleteCategory.ts",
+            "export": "deleteCategory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/deleteCategory",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.getCategoryProducts",
+          "name": "getCategoryProducts",
+          "path": "src/functions/category/getCategoryProducts",
+          "handlerFile": "src/functions/category/getCategoryProducts/handler.ts",
+          "handler": "src/functions/category/getCategoryProducts/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/getCategoryProducts.ts",
+            "export": "getCategoryProducts"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/getCategoryProducts",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.listSubcategories",
+          "name": "listSubcategories",
+          "path": "src/functions/category/listSubcategories",
+          "handlerFile": "src/functions/category/listSubcategories/handler.ts",
+          "handler": "src/functions/category/listSubcategories/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/listSubcategories.ts",
+            "export": "listSubcategories"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/listSubcategories",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.createSubcategory",
+          "name": "createSubcategory",
+          "path": "src/functions/category/createSubcategory",
+          "handlerFile": "src/functions/category/createSubcategory/handler.ts",
+          "handler": "src/functions/category/createSubcategory/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/createSubcategory.ts",
+            "export": "createSubcategory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/createSubcategory",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "category.moveCategory",
+          "name": "moveCategory",
+          "path": "src/functions/category/moveCategory",
+          "handlerFile": "src/functions/category/moveCategory/handler.ts",
+          "handler": "src/functions/category/moveCategory/handler.handler",
+          "service": {
+            "application": "category",
+            "path": "src/services/category/moveCategory.ts",
+            "export": "moveCategory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/category/moveCategory",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cart",
+      "path": "src/functions/cart",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "cart.getCart",
+          "name": "getCart",
+          "path": "src/functions/cart/getCart",
+          "handlerFile": "src/functions/cart/getCart/handler.ts",
+          "handler": "src/functions/cart/getCart/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/getCart.ts",
+            "export": "getCart"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/getCart",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.addToCart",
+          "name": "addToCart",
+          "path": "src/functions/cart/addToCart",
+          "handlerFile": "src/functions/cart/addToCart/handler.ts",
+          "handler": "src/functions/cart/addToCart/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/addToCart.ts",
+            "export": "addToCart"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/addToCart",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.updateCartItem",
+          "name": "updateCartItem",
+          "path": "src/functions/cart/updateCartItem",
+          "handlerFile": "src/functions/cart/updateCartItem/handler.ts",
+          "handler": "src/functions/cart/updateCartItem/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/updateCartItem.ts",
+            "export": "updateCartItem"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/updateCartItem",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.removeCartItem",
+          "name": "removeCartItem",
+          "path": "src/functions/cart/removeCartItem",
+          "handlerFile": "src/functions/cart/removeCartItem/handler.ts",
+          "handler": "src/functions/cart/removeCartItem/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/removeCartItem.ts",
+            "export": "removeCartItem"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/removeCartItem",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.clearCart",
+          "name": "clearCart",
+          "path": "src/functions/cart/clearCart",
+          "handlerFile": "src/functions/cart/clearCart/handler.ts",
+          "handler": "src/functions/cart/clearCart/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/clearCart.ts",
+            "export": "clearCart"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/clearCart",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.applyCartCoupon",
+          "name": "applyCartCoupon",
+          "path": "src/functions/cart/applyCartCoupon",
+          "handlerFile": "src/functions/cart/applyCartCoupon/handler.ts",
+          "handler": "src/functions/cart/applyCartCoupon/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/applyCartCoupon.ts",
+            "export": "applyCartCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/applyCartCoupon",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.removeCartCoupon",
+          "name": "removeCartCoupon",
+          "path": "src/functions/cart/removeCartCoupon",
+          "handlerFile": "src/functions/cart/removeCartCoupon/handler.ts",
+          "handler": "src/functions/cart/removeCartCoupon/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/removeCartCoupon.ts",
+            "export": "removeCartCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/removeCartCoupon",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.getCartTotals",
+          "name": "getCartTotals",
+          "path": "src/functions/cart/getCartTotals",
+          "handlerFile": "src/functions/cart/getCartTotals/handler.ts",
+          "handler": "src/functions/cart/getCartTotals/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/getCartTotals.ts",
+            "export": "getCartTotals"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/getCartTotals",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.mergeCart",
+          "name": "mergeCart",
+          "path": "src/functions/cart/mergeCart",
+          "handlerFile": "src/functions/cart/mergeCart/handler.ts",
+          "handler": "src/functions/cart/mergeCart/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/mergeCart.ts",
+            "export": "mergeCart"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/mergeCart",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.saveForLater",
+          "name": "saveForLater",
+          "path": "src/functions/cart/saveForLater",
+          "handlerFile": "src/functions/cart/saveForLater/handler.ts",
+          "handler": "src/functions/cart/saveForLater/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/saveForLater.ts",
+            "export": "saveForLater"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/saveForLater",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "cart.getSavedItems",
+          "name": "getSavedItems",
+          "path": "src/functions/cart/getSavedItems",
+          "handlerFile": "src/functions/cart/getSavedItems/handler.ts",
+          "handler": "src/functions/cart/getSavedItems/handler.handler",
+          "service": {
+            "application": "cart",
+            "path": "src/services/cart/getSavedItems.ts",
+            "export": "getSavedItems"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/cart/getSavedItems",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "order",
+      "path": "src/functions/order",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "order.listOrders",
+          "name": "listOrders",
+          "path": "src/functions/order/listOrders",
+          "handlerFile": "src/functions/order/listOrders/handler.ts",
+          "handler": "src/functions/order/listOrders/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/listOrders.ts",
+            "export": "listOrders"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/listOrders",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.getOrder",
+          "name": "getOrder",
+          "path": "src/functions/order/getOrder",
+          "handlerFile": "src/functions/order/getOrder/handler.ts",
+          "handler": "src/functions/order/getOrder/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/getOrder.ts",
+            "export": "getOrder"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/getOrder",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.createOrder",
+          "name": "createOrder",
+          "path": "src/functions/order/createOrder",
+          "handlerFile": "src/functions/order/createOrder/handler.ts",
+          "handler": "src/functions/order/createOrder/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/createOrder.ts",
+            "export": "createOrder"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/createOrder",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.cancelOrder",
+          "name": "cancelOrder",
+          "path": "src/functions/order/cancelOrder",
+          "handlerFile": "src/functions/order/cancelOrder/handler.ts",
+          "handler": "src/functions/order/cancelOrder/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/cancelOrder.ts",
+            "export": "cancelOrder"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/cancelOrder",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.updateOrderStatus",
+          "name": "updateOrderStatus",
+          "path": "src/functions/order/updateOrderStatus",
+          "handlerFile": "src/functions/order/updateOrderStatus/handler.ts",
+          "handler": "src/functions/order/updateOrderStatus/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/updateOrderStatus.ts",
+            "export": "updateOrderStatus"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/updateOrderStatus",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.getOrderItems",
+          "name": "getOrderItems",
+          "path": "src/functions/order/getOrderItems",
+          "handlerFile": "src/functions/order/getOrderItems/handler.ts",
+          "handler": "src/functions/order/getOrderItems/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/getOrderItems.ts",
+            "export": "getOrderItems"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/getOrderItems",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.getOrderTimeline",
+          "name": "getOrderTimeline",
+          "path": "src/functions/order/getOrderTimeline",
+          "handlerFile": "src/functions/order/getOrderTimeline/handler.ts",
+          "handler": "src/functions/order/getOrderTimeline/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/getOrderTimeline.ts",
+            "export": "getOrderTimeline"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/getOrderTimeline",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.reorder",
+          "name": "reorder",
+          "path": "src/functions/order/reorder",
+          "handlerFile": "src/functions/order/reorder/handler.ts",
+          "handler": "src/functions/order/reorder/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/reorder.ts",
+            "export": "reorder"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/reorder",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.getOrderInvoice",
+          "name": "getOrderInvoice",
+          "path": "src/functions/order/getOrderInvoice",
+          "handlerFile": "src/functions/order/getOrderInvoice/handler.ts",
+          "handler": "src/functions/order/getOrderInvoice/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/getOrderInvoice.ts",
+            "export": "getOrderInvoice"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/getOrderInvoice",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.downloadOrderInvoice",
+          "name": "downloadOrderInvoice",
+          "path": "src/functions/order/downloadOrderInvoice",
+          "handlerFile": "src/functions/order/downloadOrderInvoice/handler.ts",
+          "handler": "src/functions/order/downloadOrderInvoice/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/downloadOrderInvoice.ts",
+            "export": "downloadOrderInvoice"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/downloadOrderInvoice",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "order.confirmOrder",
+          "name": "confirmOrder",
+          "path": "src/functions/order/confirmOrder",
+          "handlerFile": "src/functions/order/confirmOrder/handler.ts",
+          "handler": "src/functions/order/confirmOrder/handler.handler",
+          "service": {
+            "application": "order",
+            "path": "src/services/order/confirmOrder.ts",
+            "export": "confirmOrder"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/order/confirmOrder",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "checkout",
+      "path": "src/functions/checkout",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "checkout.startCheckout",
+          "name": "startCheckout",
+          "path": "src/functions/checkout/startCheckout",
+          "handlerFile": "src/functions/checkout/startCheckout/handler.ts",
+          "handler": "src/functions/checkout/startCheckout/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/startCheckout.ts",
+            "export": "startCheckout"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/startCheckout",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.getCheckout",
+          "name": "getCheckout",
+          "path": "src/functions/checkout/getCheckout",
+          "handlerFile": "src/functions/checkout/getCheckout/handler.ts",
+          "handler": "src/functions/checkout/getCheckout/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/getCheckout.ts",
+            "export": "getCheckout"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/getCheckout",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.updateCheckout",
+          "name": "updateCheckout",
+          "path": "src/functions/checkout/updateCheckout",
+          "handlerFile": "src/functions/checkout/updateCheckout/handler.ts",
+          "handler": "src/functions/checkout/updateCheckout/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/updateCheckout.ts",
+            "export": "updateCheckout"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/updateCheckout",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.setCheckoutShipping",
+          "name": "setCheckoutShipping",
+          "path": "src/functions/checkout/setCheckoutShipping",
+          "handlerFile": "src/functions/checkout/setCheckoutShipping/handler.ts",
+          "handler": "src/functions/checkout/setCheckoutShipping/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/setCheckoutShipping.ts",
+            "export": "setCheckoutShipping"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/setCheckoutShipping",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.setCheckoutPayment",
+          "name": "setCheckoutPayment",
+          "path": "src/functions/checkout/setCheckoutPayment",
+          "handlerFile": "src/functions/checkout/setCheckoutPayment/handler.ts",
+          "handler": "src/functions/checkout/setCheckoutPayment/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/setCheckoutPayment.ts",
+            "export": "setCheckoutPayment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/setCheckoutPayment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.placeOrder",
+          "name": "placeOrder",
+          "path": "src/functions/checkout/placeOrder",
+          "handlerFile": "src/functions/checkout/placeOrder/handler.ts",
+          "handler": "src/functions/checkout/placeOrder/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/placeOrder.ts",
+            "export": "placeOrder"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/placeOrder",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.validateCheckout",
+          "name": "validateCheckout",
+          "path": "src/functions/checkout/validateCheckout",
+          "handlerFile": "src/functions/checkout/validateCheckout/handler.ts",
+          "handler": "src/functions/checkout/validateCheckout/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/validateCheckout.ts",
+            "export": "validateCheckout"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/validateCheckout",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.getCheckoutSummary",
+          "name": "getCheckoutSummary",
+          "path": "src/functions/checkout/getCheckoutSummary",
+          "handlerFile": "src/functions/checkout/getCheckoutSummary/handler.ts",
+          "handler": "src/functions/checkout/getCheckoutSummary/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/getCheckoutSummary.ts",
+            "export": "getCheckoutSummary"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/getCheckoutSummary",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "checkout.applyCheckoutGiftCard",
+          "name": "applyCheckoutGiftCard",
+          "path": "src/functions/checkout/applyCheckoutGiftCard",
+          "handlerFile": "src/functions/checkout/applyCheckoutGiftCard/handler.ts",
+          "handler": "src/functions/checkout/applyCheckoutGiftCard/handler.handler",
+          "service": {
+            "application": "checkout",
+            "path": "src/services/checkout/applyCheckoutGiftCard.ts",
+            "export": "applyCheckoutGiftCard"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/checkout/applyCheckoutGiftCard",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "customer",
+      "path": "src/functions/customer",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "customer.getCustomer",
+          "name": "getCustomer",
+          "path": "src/functions/customer/getCustomer",
+          "handlerFile": "src/functions/customer/getCustomer/handler.ts",
+          "handler": "src/functions/customer/getCustomer/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/getCustomer.ts",
+            "export": "getCustomer"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/getCustomer",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.updateCustomer",
+          "name": "updateCustomer",
+          "path": "src/functions/customer/updateCustomer",
+          "handlerFile": "src/functions/customer/updateCustomer/handler.ts",
+          "handler": "src/functions/customer/updateCustomer/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/updateCustomer.ts",
+            "export": "updateCustomer"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/updateCustomer",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.deleteCustomer",
+          "name": "deleteCustomer",
+          "path": "src/functions/customer/deleteCustomer",
+          "handlerFile": "src/functions/customer/deleteCustomer/handler.ts",
+          "handler": "src/functions/customer/deleteCustomer/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/deleteCustomer.ts",
+            "export": "deleteCustomer"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/deleteCustomer",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.listCustomers",
+          "name": "listCustomers",
+          "path": "src/functions/customer/listCustomers",
+          "handlerFile": "src/functions/customer/listCustomers/handler.ts",
+          "handler": "src/functions/customer/listCustomers/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/listCustomers.ts",
+            "export": "listCustomers"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/listCustomers",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.getCustomerOrders",
+          "name": "getCustomerOrders",
+          "path": "src/functions/customer/getCustomerOrders",
+          "handlerFile": "src/functions/customer/getCustomerOrders/handler.ts",
+          "handler": "src/functions/customer/getCustomerOrders/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/getCustomerOrders.ts",
+            "export": "getCustomerOrders"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/getCustomerOrders",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.getCustomerAddresses",
+          "name": "getCustomerAddresses",
+          "path": "src/functions/customer/getCustomerAddresses",
+          "handlerFile": "src/functions/customer/getCustomerAddresses/handler.ts",
+          "handler": "src/functions/customer/getCustomerAddresses/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/getCustomerAddresses.ts",
+            "export": "getCustomerAddresses"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/getCustomerAddresses",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.updateCustomerPreferences",
+          "name": "updateCustomerPreferences",
+          "path": "src/functions/customer/updateCustomerPreferences",
+          "handlerFile": "src/functions/customer/updateCustomerPreferences/handler.ts",
+          "handler": "src/functions/customer/updateCustomerPreferences/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/updateCustomerPreferences.ts",
+            "export": "updateCustomerPreferences"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/updateCustomerPreferences",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.getCustomerProfile",
+          "name": "getCustomerProfile",
+          "path": "src/functions/customer/getCustomerProfile",
+          "handlerFile": "src/functions/customer/getCustomerProfile/handler.ts",
+          "handler": "src/functions/customer/getCustomerProfile/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/getCustomerProfile.ts",
+            "export": "getCustomerProfile"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/getCustomerProfile",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "customer.deactivateCustomer",
+          "name": "deactivateCustomer",
+          "path": "src/functions/customer/deactivateCustomer",
+          "handlerFile": "src/functions/customer/deactivateCustomer/handler.ts",
+          "handler": "src/functions/customer/deactivateCustomer/handler.handler",
+          "service": {
+            "application": "customer",
+            "path": "src/services/customer/deactivateCustomer.ts",
+            "export": "deactivateCustomer"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/customer/deactivateCustomer",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "inventory",
+      "path": "src/functions/inventory",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "inventory.getInventory",
+          "name": "getInventory",
+          "path": "src/functions/inventory/getInventory",
+          "handlerFile": "src/functions/inventory/getInventory/handler.ts",
+          "handler": "src/functions/inventory/getInventory/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/getInventory.ts",
+            "export": "getInventory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/getInventory",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.updateInventory",
+          "name": "updateInventory",
+          "path": "src/functions/inventory/updateInventory",
+          "handlerFile": "src/functions/inventory/updateInventory/handler.ts",
+          "handler": "src/functions/inventory/updateInventory/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/updateInventory.ts",
+            "export": "updateInventory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/updateInventory",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.reserveStock",
+          "name": "reserveStock",
+          "path": "src/functions/inventory/reserveStock",
+          "handlerFile": "src/functions/inventory/reserveStock/handler.ts",
+          "handler": "src/functions/inventory/reserveStock/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/reserveStock.ts",
+            "export": "reserveStock"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/reserveStock",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.releaseStock",
+          "name": "releaseStock",
+          "path": "src/functions/inventory/releaseStock",
+          "handlerFile": "src/functions/inventory/releaseStock/handler.ts",
+          "handler": "src/functions/inventory/releaseStock/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/releaseStock.ts",
+            "export": "releaseStock"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/releaseStock",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.listLowStock",
+          "name": "listLowStock",
+          "path": "src/functions/inventory/listLowStock",
+          "handlerFile": "src/functions/inventory/listLowStock/handler.ts",
+          "handler": "src/functions/inventory/listLowStock/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/listLowStock.ts",
+            "export": "listLowStock"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/listLowStock",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.adjustInventory",
+          "name": "adjustInventory",
+          "path": "src/functions/inventory/adjustInventory",
+          "handlerFile": "src/functions/inventory/adjustInventory/handler.ts",
+          "handler": "src/functions/inventory/adjustInventory/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/adjustInventory.ts",
+            "export": "adjustInventory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/adjustInventory",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.getInventoryHistory",
+          "name": "getInventoryHistory",
+          "path": "src/functions/inventory/getInventoryHistory",
+          "handlerFile": "src/functions/inventory/getInventoryHistory/handler.ts",
+          "handler": "src/functions/inventory/getInventoryHistory/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/getInventoryHistory.ts",
+            "export": "getInventoryHistory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/getInventoryHistory",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.syncInventory",
+          "name": "syncInventory",
+          "path": "src/functions/inventory/syncInventory",
+          "handlerFile": "src/functions/inventory/syncInventory/handler.ts",
+          "handler": "src/functions/inventory/syncInventory/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/syncInventory.ts",
+            "export": "syncInventory"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/syncInventory",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "inventory.getWarehouseStock",
+          "name": "getWarehouseStock",
+          "path": "src/functions/inventory/getWarehouseStock",
+          "handlerFile": "src/functions/inventory/getWarehouseStock/handler.ts",
+          "handler": "src/functions/inventory/getWarehouseStock/handler.handler",
+          "service": {
+            "application": "inventory",
+            "path": "src/services/inventory/getWarehouseStock.ts",
+            "export": "getWarehouseStock"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/inventory/getWarehouseStock",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "review",
+      "path": "src/functions/review",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "review.listReviews",
+          "name": "listReviews",
+          "path": "src/functions/review/listReviews",
+          "handlerFile": "src/functions/review/listReviews/handler.ts",
+          "handler": "src/functions/review/listReviews/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/listReviews.ts",
+            "export": "listReviews"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/listReviews",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.getReview",
+          "name": "getReview",
+          "path": "src/functions/review/getReview",
+          "handlerFile": "src/functions/review/getReview/handler.ts",
+          "handler": "src/functions/review/getReview/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/getReview.ts",
+            "export": "getReview"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/getReview",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.createReview",
+          "name": "createReview",
+          "path": "src/functions/review/createReview",
+          "handlerFile": "src/functions/review/createReview/handler.ts",
+          "handler": "src/functions/review/createReview/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/createReview.ts",
+            "export": "createReview"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/createReview",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.updateReview",
+          "name": "updateReview",
+          "path": "src/functions/review/updateReview",
+          "handlerFile": "src/functions/review/updateReview/handler.ts",
+          "handler": "src/functions/review/updateReview/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/updateReview.ts",
+            "export": "updateReview"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/updateReview",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.deleteReview",
+          "name": "deleteReview",
+          "path": "src/functions/review/deleteReview",
+          "handlerFile": "src/functions/review/deleteReview/handler.ts",
+          "handler": "src/functions/review/deleteReview/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/deleteReview.ts",
+            "export": "deleteReview"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/deleteReview",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.approveReview",
+          "name": "approveReview",
+          "path": "src/functions/review/approveReview",
+          "handlerFile": "src/functions/review/approveReview/handler.ts",
+          "handler": "src/functions/review/approveReview/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/approveReview.ts",
+            "export": "approveReview"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/approveReview",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.reportReview",
+          "name": "reportReview",
+          "path": "src/functions/review/reportReview",
+          "handlerFile": "src/functions/review/reportReview/handler.ts",
+          "handler": "src/functions/review/reportReview/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/reportReview.ts",
+            "export": "reportReview"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/reportReview",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.getProductReviews",
+          "name": "getProductReviews",
+          "path": "src/functions/review/getProductReviews",
+          "handlerFile": "src/functions/review/getProductReviews/handler.ts",
+          "handler": "src/functions/review/getProductReviews/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/getProductReviews.ts",
+            "export": "getProductReviews"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/getProductReviews",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "review.getReviewStats",
+          "name": "getReviewStats",
+          "path": "src/functions/review/getReviewStats",
+          "handlerFile": "src/functions/review/getReviewStats/handler.ts",
+          "handler": "src/functions/review/getReviewStats/handler.handler",
+          "service": {
+            "application": "review",
+            "path": "src/services/review/getReviewStats.ts",
+            "export": "getReviewStats"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/review/getReviewStats",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "payment",
+      "path": "src/functions/payment",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "payment.listPayments",
+          "name": "listPayments",
+          "path": "src/functions/payment/listPayments",
+          "handlerFile": "src/functions/payment/listPayments/handler.ts",
+          "handler": "src/functions/payment/listPayments/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/listPayments.ts",
+            "export": "listPayments"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/listPayments",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.getPayment",
+          "name": "getPayment",
+          "path": "src/functions/payment/getPayment",
+          "handlerFile": "src/functions/payment/getPayment/handler.ts",
+          "handler": "src/functions/payment/getPayment/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/getPayment.ts",
+            "export": "getPayment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/getPayment",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.createPayment",
+          "name": "createPayment",
+          "path": "src/functions/payment/createPayment",
+          "handlerFile": "src/functions/payment/createPayment/handler.ts",
+          "handler": "src/functions/payment/createPayment/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/createPayment.ts",
+            "export": "createPayment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/createPayment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.capturePayment",
+          "name": "capturePayment",
+          "path": "src/functions/payment/capturePayment",
+          "handlerFile": "src/functions/payment/capturePayment/handler.ts",
+          "handler": "src/functions/payment/capturePayment/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/capturePayment.ts",
+            "export": "capturePayment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/capturePayment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.refundPayment",
+          "name": "refundPayment",
+          "path": "src/functions/payment/refundPayment",
+          "handlerFile": "src/functions/payment/refundPayment/handler.ts",
+          "handler": "src/functions/payment/refundPayment/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/refundPayment.ts",
+            "export": "refundPayment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/refundPayment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.getPaymentMethods",
+          "name": "getPaymentMethods",
+          "path": "src/functions/payment/getPaymentMethods",
+          "handlerFile": "src/functions/payment/getPaymentMethods/handler.ts",
+          "handler": "src/functions/payment/getPaymentMethods/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/getPaymentMethods.ts",
+            "export": "getPaymentMethods"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/getPaymentMethods",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.addPaymentMethod",
+          "name": "addPaymentMethod",
+          "path": "src/functions/payment/addPaymentMethod",
+          "handlerFile": "src/functions/payment/addPaymentMethod/handler.ts",
+          "handler": "src/functions/payment/addPaymentMethod/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/addPaymentMethod.ts",
+            "export": "addPaymentMethod"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/addPaymentMethod",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.deletePaymentMethod",
+          "name": "deletePaymentMethod",
+          "path": "src/functions/payment/deletePaymentMethod",
+          "handlerFile": "src/functions/payment/deletePaymentMethod/handler.ts",
+          "handler": "src/functions/payment/deletePaymentMethod/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/deletePaymentMethod.ts",
+            "export": "deletePaymentMethod"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/deletePaymentMethod",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.setDefaultPaymentMethod",
+          "name": "setDefaultPaymentMethod",
+          "path": "src/functions/payment/setDefaultPaymentMethod",
+          "handlerFile": "src/functions/payment/setDefaultPaymentMethod/handler.ts",
+          "handler": "src/functions/payment/setDefaultPaymentMethod/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/setDefaultPaymentMethod.ts",
+            "export": "setDefaultPaymentMethod"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/setDefaultPaymentMethod",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "payment.webhookPayment",
+          "name": "webhookPayment",
+          "path": "src/functions/payment/webhookPayment",
+          "handlerFile": "src/functions/payment/webhookPayment/handler.ts",
+          "handler": "src/functions/payment/webhookPayment/handler.handler",
+          "service": {
+            "application": "payment",
+            "path": "src/services/payment/webhookPayment.ts",
+            "export": "webhookPayment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/payment/webhookPayment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "shipping",
+      "path": "src/functions/shipping",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "shipping.listShippingMethods",
+          "name": "listShippingMethods",
+          "path": "src/functions/shipping/listShippingMethods",
+          "handlerFile": "src/functions/shipping/listShippingMethods/handler.ts",
+          "handler": "src/functions/shipping/listShippingMethods/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/listShippingMethods.ts",
+            "export": "listShippingMethods"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/listShippingMethods",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.getShippingMethod",
+          "name": "getShippingMethod",
+          "path": "src/functions/shipping/getShippingMethod",
+          "handlerFile": "src/functions/shipping/getShippingMethod/handler.ts",
+          "handler": "src/functions/shipping/getShippingMethod/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/getShippingMethod.ts",
+            "export": "getShippingMethod"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/getShippingMethod",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.calculateShipping",
+          "name": "calculateShipping",
+          "path": "src/functions/shipping/calculateShipping",
+          "handlerFile": "src/functions/shipping/calculateShipping/handler.ts",
+          "handler": "src/functions/shipping/calculateShipping/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/calculateShipping.ts",
+            "export": "calculateShipping"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/calculateShipping",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.createShipment",
+          "name": "createShipment",
+          "path": "src/functions/shipping/createShipment",
+          "handlerFile": "src/functions/shipping/createShipment/handler.ts",
+          "handler": "src/functions/shipping/createShipment/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/createShipment.ts",
+            "export": "createShipment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/createShipment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.getShipment",
+          "name": "getShipment",
+          "path": "src/functions/shipping/getShipment",
+          "handlerFile": "src/functions/shipping/getShipment/handler.ts",
+          "handler": "src/functions/shipping/getShipment/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/getShipment.ts",
+            "export": "getShipment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/getShipment",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.trackShipment",
+          "name": "trackShipment",
+          "path": "src/functions/shipping/trackShipment",
+          "handlerFile": "src/functions/shipping/trackShipment/handler.ts",
+          "handler": "src/functions/shipping/trackShipment/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/trackShipment.ts",
+            "export": "trackShipment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/trackShipment",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.updateShipment",
+          "name": "updateShipment",
+          "path": "src/functions/shipping/updateShipment",
+          "handlerFile": "src/functions/shipping/updateShipment/handler.ts",
+          "handler": "src/functions/shipping/updateShipment/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/updateShipment.ts",
+            "export": "updateShipment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/updateShipment",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.cancelShipment",
+          "name": "cancelShipment",
+          "path": "src/functions/shipping/cancelShipment",
+          "handlerFile": "src/functions/shipping/cancelShipment/handler.ts",
+          "handler": "src/functions/shipping/cancelShipment/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/cancelShipment.ts",
+            "export": "cancelShipment"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/cancelShipment",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.listShippingZones",
+          "name": "listShippingZones",
+          "path": "src/functions/shipping/listShippingZones",
+          "handlerFile": "src/functions/shipping/listShippingZones/handler.ts",
+          "handler": "src/functions/shipping/listShippingZones/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/listShippingZones.ts",
+            "export": "listShippingZones"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/listShippingZones",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "shipping.createShippingZone",
+          "name": "createShippingZone",
+          "path": "src/functions/shipping/createShippingZone",
+          "handlerFile": "src/functions/shipping/createShippingZone/handler.ts",
+          "handler": "src/functions/shipping/createShippingZone/handler.handler",
+          "service": {
+            "application": "shipping",
+            "path": "src/services/shipping/createShippingZone.ts",
+            "export": "createShippingZone"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/shipping/createShippingZone",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "coupon",
+      "path": "src/functions/coupon",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "coupon.listCoupons",
+          "name": "listCoupons",
+          "path": "src/functions/coupon/listCoupons",
+          "handlerFile": "src/functions/coupon/listCoupons/handler.ts",
+          "handler": "src/functions/coupon/listCoupons/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/listCoupons.ts",
+            "export": "listCoupons"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/listCoupons",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.getCoupon",
+          "name": "getCoupon",
+          "path": "src/functions/coupon/getCoupon",
+          "handlerFile": "src/functions/coupon/getCoupon/handler.ts",
+          "handler": "src/functions/coupon/getCoupon/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/getCoupon.ts",
+            "export": "getCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/getCoupon",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.createCoupon",
+          "name": "createCoupon",
+          "path": "src/functions/coupon/createCoupon",
+          "handlerFile": "src/functions/coupon/createCoupon/handler.ts",
+          "handler": "src/functions/coupon/createCoupon/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/createCoupon.ts",
+            "export": "createCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/createCoupon",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.updateCoupon",
+          "name": "updateCoupon",
+          "path": "src/functions/coupon/updateCoupon",
+          "handlerFile": "src/functions/coupon/updateCoupon/handler.ts",
+          "handler": "src/functions/coupon/updateCoupon/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/updateCoupon.ts",
+            "export": "updateCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/updateCoupon",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.deleteCoupon",
+          "name": "deleteCoupon",
+          "path": "src/functions/coupon/deleteCoupon",
+          "handlerFile": "src/functions/coupon/deleteCoupon/handler.ts",
+          "handler": "src/functions/coupon/deleteCoupon/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/deleteCoupon.ts",
+            "export": "deleteCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/deleteCoupon",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.validateCoupon",
+          "name": "validateCoupon",
+          "path": "src/functions/coupon/validateCoupon",
+          "handlerFile": "src/functions/coupon/validateCoupon/handler.ts",
+          "handler": "src/functions/coupon/validateCoupon/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/validateCoupon.ts",
+            "export": "validateCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/validateCoupon",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.applyCoupon",
+          "name": "applyCoupon",
+          "path": "src/functions/coupon/applyCoupon",
+          "handlerFile": "src/functions/coupon/applyCoupon/handler.ts",
+          "handler": "src/functions/coupon/applyCoupon/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/applyCoupon.ts",
+            "export": "applyCoupon"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/applyCoupon",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "coupon.getCouponUsage",
+          "name": "getCouponUsage",
+          "path": "src/functions/coupon/getCouponUsage",
+          "handlerFile": "src/functions/coupon/getCouponUsage/handler.ts",
+          "handler": "src/functions/coupon/getCouponUsage/handler.handler",
+          "service": {
+            "application": "coupon",
+            "path": "src/services/coupon/getCouponUsage.ts",
+            "export": "getCouponUsage"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/coupon/getCouponUsage",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wishlist",
+      "path": "src/functions/wishlist",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "wishlist.getWishlist",
+          "name": "getWishlist",
+          "path": "src/functions/wishlist/getWishlist",
+          "handlerFile": "src/functions/wishlist/getWishlist/handler.ts",
+          "handler": "src/functions/wishlist/getWishlist/handler.handler",
+          "service": {
+            "application": "wishlist",
+            "path": "src/services/wishlist/getWishlist.ts",
+            "export": "getWishlist"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/wishlist/getWishlist",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "wishlist.addToWishlist",
+          "name": "addToWishlist",
+          "path": "src/functions/wishlist/addToWishlist",
+          "handlerFile": "src/functions/wishlist/addToWishlist/handler.ts",
+          "handler": "src/functions/wishlist/addToWishlist/handler.handler",
+          "service": {
+            "application": "wishlist",
+            "path": "src/services/wishlist/addToWishlist.ts",
+            "export": "addToWishlist"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/wishlist/addToWishlist",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "wishlist.removeFromWishlist",
+          "name": "removeFromWishlist",
+          "path": "src/functions/wishlist/removeFromWishlist",
+          "handlerFile": "src/functions/wishlist/removeFromWishlist/handler.ts",
+          "handler": "src/functions/wishlist/removeFromWishlist/handler.handler",
+          "service": {
+            "application": "wishlist",
+            "path": "src/services/wishlist/removeFromWishlist.ts",
+            "export": "removeFromWishlist"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/wishlist/removeFromWishlist",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "wishlist.clearWishlist",
+          "name": "clearWishlist",
+          "path": "src/functions/wishlist/clearWishlist",
+          "handlerFile": "src/functions/wishlist/clearWishlist/handler.ts",
+          "handler": "src/functions/wishlist/clearWishlist/handler.handler",
+          "service": {
+            "application": "wishlist",
+            "path": "src/services/wishlist/clearWishlist.ts",
+            "export": "clearWishlist"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/wishlist/clearWishlist",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "wishlist.moveWishlistToCart",
+          "name": "moveWishlistToCart",
+          "path": "src/functions/wishlist/moveWishlistToCart",
+          "handlerFile": "src/functions/wishlist/moveWishlistToCart/handler.ts",
+          "handler": "src/functions/wishlist/moveWishlistToCart/handler.handler",
+          "service": {
+            "application": "wishlist",
+            "path": "src/services/wishlist/moveWishlistToCart.ts",
+            "export": "moveWishlistToCart"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/wishlist/moveWishlistToCart",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "wishlist.getWishlistCount",
+          "name": "getWishlistCount",
+          "path": "src/functions/wishlist/getWishlistCount",
+          "handlerFile": "src/functions/wishlist/getWishlistCount/handler.ts",
+          "handler": "src/functions/wishlist/getWishlistCount/handler.handler",
+          "service": {
+            "application": "wishlist",
+            "path": "src/services/wishlist/getWishlistCount.ts",
+            "export": "getWishlistCount"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/wishlist/getWishlistCount",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    },
+    {
+      "name": "address",
+      "path": "src/functions/address",
+      "template": "template.yaml",
+      "functions": [
+        {
+          "id": "address.listAddresses",
+          "name": "listAddresses",
+          "path": "src/functions/address/listAddresses",
+          "handlerFile": "src/functions/address/listAddresses/handler.ts",
+          "handler": "src/functions/address/listAddresses/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/listAddresses.ts",
+            "export": "listAddresses"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/listAddresses",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "address.getAddress",
+          "name": "getAddress",
+          "path": "src/functions/address/getAddress",
+          "handlerFile": "src/functions/address/getAddress/handler.ts",
+          "handler": "src/functions/address/getAddress/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/getAddress.ts",
+            "export": "getAddress"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/getAddress",
+            "method": "GET"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "address.createAddress",
+          "name": "createAddress",
+          "path": "src/functions/address/createAddress",
+          "handlerFile": "src/functions/address/createAddress/handler.ts",
+          "handler": "src/functions/address/createAddress/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/createAddress.ts",
+            "export": "createAddress"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/createAddress",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "address.updateAddress",
+          "name": "updateAddress",
+          "path": "src/functions/address/updateAddress",
+          "handlerFile": "src/functions/address/updateAddress/handler.ts",
+          "handler": "src/functions/address/updateAddress/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/updateAddress.ts",
+            "export": "updateAddress"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/updateAddress",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "address.deleteAddress",
+          "name": "deleteAddress",
+          "path": "src/functions/address/deleteAddress",
+          "handlerFile": "src/functions/address/deleteAddress/handler.ts",
+          "handler": "src/functions/address/deleteAddress/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/deleteAddress.ts",
+            "export": "deleteAddress"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/deleteAddress",
+            "method": "DELETE"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "address.setDefaultAddress",
+          "name": "setDefaultAddress",
+          "path": "src/functions/address/setDefaultAddress",
+          "handlerFile": "src/functions/address/setDefaultAddress/handler.ts",
+          "handler": "src/functions/address/setDefaultAddress/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/setDefaultAddress.ts",
+            "export": "setDefaultAddress"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/setDefaultAddress",
+            "method": "PUT"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        },
+        {
+          "id": "address.validateAddress",
+          "name": "validateAddress",
+          "path": "src/functions/address/validateAddress",
+          "handlerFile": "src/functions/address/validateAddress/handler.ts",
+          "handler": "src/functions/address/validateAddress/handler.handler",
+          "service": {
+            "application": "address",
+            "path": "src/services/address/validateAddress.ts",
+            "export": "validateAddress"
+          },
+          "runtime": "nodejs20.x",
+          "memorySize": 128,
+          "apiGateway": {
+            "enabled": true,
+            "gateway": "test-cli-http-api",
+            "path": "/address/validateAddress",
+            "method": "POST"
+          },
+          "layer": {
+            "enabled": true,
+            "name": "shared",
+            "path": "src/shared"
+          }
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "application": "auth",
+      "path": "src/services/auth",
+      "files": [
+        "src/services/auth/login.ts",
+        "src/services/auth/register.ts",
+        "src/services/auth/logout.ts",
+        "src/services/auth/refreshToken.ts",
+        "src/services/auth/forgotPassword.ts",
+        "src/services/auth/resetPassword.ts",
+        "src/services/auth/verifyEmail.ts",
+        "src/services/auth/changePassword.ts",
+        "src/services/auth/getMe.ts",
+        "src/services/auth/socialLogin.ts",
+        "src/services/auth/enable2fa.ts",
+        "src/services/auth/verify2fa.ts",
+        "src/services/auth/disable2fa.ts",
+        "src/services/auth/getSessions.ts",
+        "src/services/auth/revokeSession.ts"
+      ]
+    },
+    {
+      "application": "product",
+      "path": "src/services/product",
+      "files": [
+        "src/services/product/getProducts.ts",
+        "src/services/product/createProduct.ts",
+        "src/services/product/getProduct.ts",
+        "src/services/product/updateProduct.ts",
+        "src/services/product/deleteProduct.ts",
+        "src/services/product/searchProducts.ts",
+        "src/services/product/getProductImages.ts",
+        "src/services/product/uploadProductImage.ts",
+        "src/services/product/getFeaturedProducts.ts",
+        "src/services/product/getRelatedProducts.ts",
+        "src/services/product/getProductVariants.ts",
+        "src/services/product/createProductVariant.ts",
+        "src/services/product/updateProductVariant.ts",
+        "src/services/product/deleteProductVariant.ts",
+        "src/services/product/getProductStock.ts",
+        "src/services/product/publishProduct.ts",
+        "src/services/product/unpublishProduct.ts"
+      ]
+    },
+    {
+      "application": "category",
+      "path": "src/services/category",
+      "files": [
+        "src/services/category/listCategories.ts",
+        "src/services/category/getCategory.ts",
+        "src/services/category/createCategory.ts",
+        "src/services/category/updateCategory.ts",
+        "src/services/category/deleteCategory.ts",
+        "src/services/category/getCategoryProducts.ts",
+        "src/services/category/listSubcategories.ts",
+        "src/services/category/createSubcategory.ts",
+        "src/services/category/moveCategory.ts"
+      ]
+    },
+    {
+      "application": "cart",
+      "path": "src/services/cart",
+      "files": [
+        "src/services/cart/getCart.ts",
+        "src/services/cart/addToCart.ts",
+        "src/services/cart/updateCartItem.ts",
+        "src/services/cart/removeCartItem.ts",
+        "src/services/cart/clearCart.ts",
+        "src/services/cart/applyCartCoupon.ts",
+        "src/services/cart/removeCartCoupon.ts",
+        "src/services/cart/getCartTotals.ts",
+        "src/services/cart/mergeCart.ts",
+        "src/services/cart/saveForLater.ts",
+        "src/services/cart/getSavedItems.ts"
+      ]
+    },
+    {
+      "application": "order",
+      "path": "src/services/order",
+      "files": [
+        "src/services/order/listOrders.ts",
+        "src/services/order/getOrder.ts",
+        "src/services/order/createOrder.ts",
+        "src/services/order/cancelOrder.ts",
+        "src/services/order/updateOrderStatus.ts",
+        "src/services/order/getOrderItems.ts",
+        "src/services/order/getOrderTimeline.ts",
+        "src/services/order/reorder.ts",
+        "src/services/order/getOrderInvoice.ts",
+        "src/services/order/downloadOrderInvoice.ts",
+        "src/services/order/confirmOrder.ts"
+      ]
+    },
+    {
+      "application": "checkout",
+      "path": "src/services/checkout",
+      "files": [
+        "src/services/checkout/startCheckout.ts",
+        "src/services/checkout/getCheckout.ts",
+        "src/services/checkout/updateCheckout.ts",
+        "src/services/checkout/setCheckoutShipping.ts",
+        "src/services/checkout/setCheckoutPayment.ts",
+        "src/services/checkout/placeOrder.ts",
+        "src/services/checkout/validateCheckout.ts",
+        "src/services/checkout/getCheckoutSummary.ts",
+        "src/services/checkout/applyCheckoutGiftCard.ts"
+      ]
+    },
+    {
+      "application": "customer",
+      "path": "src/services/customer",
+      "files": [
+        "src/services/customer/getCustomer.ts",
+        "src/services/customer/updateCustomer.ts",
+        "src/services/customer/deleteCustomer.ts",
+        "src/services/customer/listCustomers.ts",
+        "src/services/customer/getCustomerOrders.ts",
+        "src/services/customer/getCustomerAddresses.ts",
+        "src/services/customer/updateCustomerPreferences.ts",
+        "src/services/customer/getCustomerProfile.ts",
+        "src/services/customer/deactivateCustomer.ts"
+      ]
+    },
+    {
+      "application": "inventory",
+      "path": "src/services/inventory",
+      "files": [
+        "src/services/inventory/getInventory.ts",
+        "src/services/inventory/updateInventory.ts",
+        "src/services/inventory/reserveStock.ts",
+        "src/services/inventory/releaseStock.ts",
+        "src/services/inventory/listLowStock.ts",
+        "src/services/inventory/adjustInventory.ts",
+        "src/services/inventory/getInventoryHistory.ts",
+        "src/services/inventory/syncInventory.ts",
+        "src/services/inventory/getWarehouseStock.ts"
+      ]
+    },
+    {
+      "application": "review",
+      "path": "src/services/review",
+      "files": [
+        "src/services/review/listReviews.ts",
+        "src/services/review/getReview.ts",
+        "src/services/review/createReview.ts",
+        "src/services/review/updateReview.ts",
+        "src/services/review/deleteReview.ts",
+        "src/services/review/approveReview.ts",
+        "src/services/review/reportReview.ts",
+        "src/services/review/getProductReviews.ts",
+        "src/services/review/getReviewStats.ts"
+      ]
+    },
+    {
+      "application": "payment",
+      "path": "src/services/payment",
+      "files": [
+        "src/services/payment/listPayments.ts",
+        "src/services/payment/getPayment.ts",
+        "src/services/payment/createPayment.ts",
+        "src/services/payment/capturePayment.ts",
+        "src/services/payment/refundPayment.ts",
+        "src/services/payment/getPaymentMethods.ts",
+        "src/services/payment/addPaymentMethod.ts",
+        "src/services/payment/deletePaymentMethod.ts",
+        "src/services/payment/setDefaultPaymentMethod.ts",
+        "src/services/payment/webhookPayment.ts"
+      ]
+    },
+    {
+      "application": "shipping",
+      "path": "src/services/shipping",
+      "files": [
+        "src/services/shipping/listShippingMethods.ts",
+        "src/services/shipping/getShippingMethod.ts",
+        "src/services/shipping/calculateShipping.ts",
+        "src/services/shipping/createShipment.ts",
+        "src/services/shipping/getShipment.ts",
+        "src/services/shipping/trackShipment.ts",
+        "src/services/shipping/updateShipment.ts",
+        "src/services/shipping/cancelShipment.ts",
+        "src/services/shipping/listShippingZones.ts",
+        "src/services/shipping/createShippingZone.ts"
+      ]
+    },
+    {
+      "application": "coupon",
+      "path": "src/services/coupon",
+      "files": [
+        "src/services/coupon/listCoupons.ts",
+        "src/services/coupon/getCoupon.ts",
+        "src/services/coupon/createCoupon.ts",
+        "src/services/coupon/updateCoupon.ts",
+        "src/services/coupon/deleteCoupon.ts",
+        "src/services/coupon/validateCoupon.ts",
+        "src/services/coupon/applyCoupon.ts",
+        "src/services/coupon/getCouponUsage.ts"
+      ]
+    },
+    {
+      "application": "wishlist",
+      "path": "src/services/wishlist",
+      "files": [
+        "src/services/wishlist/getWishlist.ts",
+        "src/services/wishlist/addToWishlist.ts",
+        "src/services/wishlist/removeFromWishlist.ts",
+        "src/services/wishlist/clearWishlist.ts",
+        "src/services/wishlist/moveWishlistToCart.ts",
+        "src/services/wishlist/getWishlistCount.ts"
+      ]
+    },
+    {
+      "application": "address",
+      "path": "src/services/address",
+      "files": [
+        "src/services/address/listAddresses.ts",
+        "src/services/address/getAddress.ts",
+        "src/services/address/createAddress.ts",
+        "src/services/address/updateAddress.ts",
+        "src/services/address/deleteAddress.ts",
+        "src/services/address/setDefaultAddress.ts",
+        "src/services/address/validateAddress.ts"
+      ]
+    }
+  ],
+  "structure": {
+    "directories": [
+      "src",
+      "src/functions",
+      "src/services",
+      "src/functions/auth",
+      "src/functions/auth/login",
+      "src/functions/auth/register",
+      "src/functions/auth/logout",
+      "src/functions/auth/refreshToken",
+      "src/functions/auth/forgotPassword",
+      "src/functions/auth/resetPassword",
+      "src/functions/auth/verifyEmail",
+      "src/functions/auth/changePassword",
+      "src/functions/auth/getMe",
+      "src/functions/auth/socialLogin",
+      "src/functions/auth/enable2fa",
+      "src/functions/auth/verify2fa",
+      "src/functions/auth/disable2fa",
+      "src/functions/auth/getSessions",
+      "src/functions/auth/revokeSession",
+      "src/services/auth",
+      "src/functions/product",
+      "src/functions/product/getProducts",
+      "src/functions/product/createProduct",
+      "src/functions/product/getProduct",
+      "src/functions/product/updateProduct",
+      "src/functions/product/deleteProduct",
+      "src/functions/product/searchProducts",
+      "src/functions/product/getProductImages",
+      "src/functions/product/uploadProductImage",
+      "src/functions/product/getFeaturedProducts",
+      "src/functions/product/getRelatedProducts",
+      "src/functions/product/getProductVariants",
+      "src/functions/product/createProductVariant",
+      "src/functions/product/updateProductVariant",
+      "src/functions/product/deleteProductVariant",
+      "src/functions/product/getProductStock",
+      "src/functions/product/publishProduct",
+      "src/functions/product/unpublishProduct",
+      "src/services/product",
+      "src/functions/category",
+      "src/functions/category/listCategories",
+      "src/functions/category/getCategory",
+      "src/functions/category/createCategory",
+      "src/functions/category/updateCategory",
+      "src/functions/category/deleteCategory",
+      "src/functions/category/getCategoryProducts",
+      "src/functions/category/listSubcategories",
+      "src/functions/category/createSubcategory",
+      "src/functions/category/moveCategory",
+      "src/services/category",
+      "src/functions/cart",
+      "src/functions/cart/getCart",
+      "src/functions/cart/addToCart",
+      "src/functions/cart/updateCartItem",
+      "src/functions/cart/removeCartItem",
+      "src/functions/cart/clearCart",
+      "src/functions/cart/applyCartCoupon",
+      "src/functions/cart/removeCartCoupon",
+      "src/functions/cart/getCartTotals",
+      "src/functions/cart/mergeCart",
+      "src/functions/cart/saveForLater",
+      "src/functions/cart/getSavedItems",
+      "src/services/cart",
+      "src/functions/order",
+      "src/functions/order/listOrders",
+      "src/functions/order/getOrder",
+      "src/functions/order/createOrder",
+      "src/functions/order/cancelOrder",
+      "src/functions/order/updateOrderStatus",
+      "src/functions/order/getOrderItems",
+      "src/functions/order/getOrderTimeline",
+      "src/functions/order/reorder",
+      "src/functions/order/getOrderInvoice",
+      "src/functions/order/downloadOrderInvoice",
+      "src/functions/order/confirmOrder",
+      "src/services/order",
+      "src/functions/checkout",
+      "src/functions/checkout/startCheckout",
+      "src/functions/checkout/getCheckout",
+      "src/functions/checkout/updateCheckout",
+      "src/functions/checkout/setCheckoutShipping",
+      "src/functions/checkout/setCheckoutPayment",
+      "src/functions/checkout/placeOrder",
+      "src/functions/checkout/validateCheckout",
+      "src/functions/checkout/getCheckoutSummary",
+      "src/functions/checkout/applyCheckoutGiftCard",
+      "src/services/checkout",
+      "src/functions/customer",
+      "src/functions/customer/getCustomer",
+      "src/functions/customer/updateCustomer",
+      "src/functions/customer/deleteCustomer",
+      "src/functions/customer/listCustomers",
+      "src/functions/customer/getCustomerOrders",
+      "src/functions/customer/getCustomerAddresses",
+      "src/functions/customer/updateCustomerPreferences",
+      "src/functions/customer/getCustomerProfile",
+      "src/functions/customer/deactivateCustomer",
+      "src/services/customer",
+      "src/functions/inventory",
+      "src/functions/inventory/getInventory",
+      "src/functions/inventory/updateInventory",
+      "src/functions/inventory/reserveStock",
+      "src/functions/inventory/releaseStock",
+      "src/functions/inventory/listLowStock",
+      "src/functions/inventory/adjustInventory",
+      "src/functions/inventory/getInventoryHistory",
+      "src/functions/inventory/syncInventory",
+      "src/functions/inventory/getWarehouseStock",
+      "src/services/inventory",
+      "src/functions/review",
+      "src/functions/review/listReviews",
+      "src/functions/review/getReview",
+      "src/functions/review/createReview",
+      "src/functions/review/updateReview",
+      "src/functions/review/deleteReview",
+      "src/functions/review/approveReview",
+      "src/functions/review/reportReview",
+      "src/functions/review/getProductReviews",
+      "src/functions/review/getReviewStats",
+      "src/services/review",
+      "src/functions/payment",
+      "src/functions/payment/listPayments",
+      "src/functions/payment/getPayment",
+      "src/functions/payment/createPayment",
+      "src/functions/payment/capturePayment",
+      "src/functions/payment/refundPayment",
+      "src/functions/payment/getPaymentMethods",
+      "src/functions/payment/addPaymentMethod",
+      "src/functions/payment/deletePaymentMethod",
+      "src/functions/payment/setDefaultPaymentMethod",
+      "src/functions/payment/webhookPayment",
+      "src/services/payment",
+      "src/functions/shipping",
+      "src/functions/shipping/listShippingMethods",
+      "src/functions/shipping/getShippingMethod",
+      "src/functions/shipping/calculateShipping",
+      "src/functions/shipping/createShipment",
+      "src/functions/shipping/getShipment",
+      "src/functions/shipping/trackShipment",
+      "src/functions/shipping/updateShipment",
+      "src/functions/shipping/cancelShipment",
+      "src/functions/shipping/listShippingZones",
+      "src/functions/shipping/createShippingZone",
+      "src/services/shipping",
+      "src/functions/coupon",
+      "src/functions/coupon/listCoupons",
+      "src/functions/coupon/getCoupon",
+      "src/functions/coupon/createCoupon",
+      "src/functions/coupon/updateCoupon",
+      "src/functions/coupon/deleteCoupon",
+      "src/functions/coupon/validateCoupon",
+      "src/functions/coupon/applyCoupon",
+      "src/functions/coupon/getCouponUsage",
+      "src/services/coupon",
+      "src/functions/wishlist",
+      "src/functions/wishlist/getWishlist",
+      "src/functions/wishlist/addToWishlist",
+      "src/functions/wishlist/removeFromWishlist",
+      "src/functions/wishlist/clearWishlist",
+      "src/functions/wishlist/moveWishlistToCart",
+      "src/functions/wishlist/getWishlistCount",
+      "src/services/wishlist",
+      "src/functions/address",
+      "src/functions/address/listAddresses",
+      "src/functions/address/getAddress",
+      "src/functions/address/createAddress",
+      "src/functions/address/updateAddress",
+      "src/functions/address/deleteAddress",
+      "src/functions/address/setDefaultAddress",
+      "src/functions/address/validateAddress",
+      "src/services/address",
+      "src/shared/nodejs",
+      "prisma"
+    ],
+    "files": [
+      ".env.dev",
+      ".gitignore",
+      "README.md",
+      "package.json",
+      "prisma/schema.prisma",
+      "slskit.json",
+      "slskit.json",
+      "slskit.json",
+      "src/functions/address/createAddress/handler.ts",
+      "src/functions/address/deleteAddress/handler.ts",
+      "src/functions/address/getAddress/handler.ts",
+      "src/functions/address/listAddresses/handler.ts",
+      "src/functions/address/setDefaultAddress/handler.ts",
+      "src/functions/address/updateAddress/handler.ts",
+      "src/functions/address/validateAddress/handler.ts",
+      "src/functions/auth/changePassword/handler.ts",
+      "src/functions/auth/disable2fa/handler.ts",
+      "src/functions/auth/enable2fa/handler.ts",
+      "src/functions/auth/forgotPassword/handler.ts",
+      "src/functions/auth/getMe/handler.ts",
+      "src/functions/auth/getSessions/handler.ts",
+      "src/functions/auth/login/handler.ts",
+      "src/functions/auth/logout/handler.ts",
+      "src/functions/auth/refreshToken/handler.ts",
+      "src/functions/auth/register/handler.ts",
+      "src/functions/auth/resetPassword/handler.ts",
+      "src/functions/auth/revokeSession/handler.ts",
+      "src/functions/auth/socialLogin/handler.ts",
+      "src/functions/auth/verify2fa/handler.ts",
+      "src/functions/auth/verifyEmail/handler.ts",
+      "src/functions/cart/addToCart/handler.ts",
+      "src/functions/cart/applyCartCoupon/handler.ts",
+      "src/functions/cart/clearCart/handler.ts",
+      "src/functions/cart/getCart/handler.ts",
+      "src/functions/cart/getCartTotals/handler.ts",
+      "src/functions/cart/getSavedItems/handler.ts",
+      "src/functions/cart/mergeCart/handler.ts",
+      "src/functions/cart/removeCartCoupon/handler.ts",
+      "src/functions/cart/removeCartItem/handler.ts",
+      "src/functions/cart/saveForLater/handler.ts",
+      "src/functions/cart/updateCartItem/handler.ts",
+      "src/functions/category/createCategory/handler.ts",
+      "src/functions/category/createSubcategory/handler.ts",
+      "src/functions/category/deleteCategory/handler.ts",
+      "src/functions/category/getCategory/handler.ts",
+      "src/functions/category/getCategoryProducts/handler.ts",
+      "src/functions/category/listCategories/handler.ts",
+      "src/functions/category/listSubcategories/handler.ts",
+      "src/functions/category/moveCategory/handler.ts",
+      "src/functions/category/updateCategory/handler.ts",
+      "src/functions/checkout/applyCheckoutGiftCard/handler.ts",
+      "src/functions/checkout/getCheckout/handler.ts",
+      "src/functions/checkout/getCheckoutSummary/handler.ts",
+      "src/functions/checkout/placeOrder/handler.ts",
+      "src/functions/checkout/setCheckoutPayment/handler.ts",
+      "src/functions/checkout/setCheckoutShipping/handler.ts",
+      "src/functions/checkout/startCheckout/handler.ts",
+      "src/functions/checkout/updateCheckout/handler.ts",
+      "src/functions/checkout/validateCheckout/handler.ts",
+      "src/functions/coupon/applyCoupon/handler.ts",
+      "src/functions/coupon/createCoupon/handler.ts",
+      "src/functions/coupon/deleteCoupon/handler.ts",
+      "src/functions/coupon/getCoupon/handler.ts",
+      "src/functions/coupon/getCouponUsage/handler.ts",
+      "src/functions/coupon/listCoupons/handler.ts",
+      "src/functions/coupon/updateCoupon/handler.ts",
+      "src/functions/coupon/validateCoupon/handler.ts",
+      "src/functions/customer/deactivateCustomer/handler.ts",
+      "src/functions/customer/deleteCustomer/handler.ts",
+      "src/functions/customer/getCustomer/handler.ts",
+      "src/functions/customer/getCustomerAddresses/handler.ts",
+      "src/functions/customer/getCustomerOrders/handler.ts",
+      "src/functions/customer/getCustomerProfile/handler.ts",
+      "src/functions/customer/listCustomers/handler.ts",
+      "src/functions/customer/updateCustomer/handler.ts",
+      "src/functions/customer/updateCustomerPreferences/handler.ts",
+      "src/functions/inventory/adjustInventory/handler.ts",
+      "src/functions/inventory/getInventory/handler.ts",
+      "src/functions/inventory/getInventoryHistory/handler.ts",
+      "src/functions/inventory/getWarehouseStock/handler.ts",
+      "src/functions/inventory/listLowStock/handler.ts",
+      "src/functions/inventory/releaseStock/handler.ts",
+      "src/functions/inventory/reserveStock/handler.ts",
+      "src/functions/inventory/syncInventory/handler.ts",
+      "src/functions/inventory/updateInventory/handler.ts",
+      "src/functions/order/cancelOrder/handler.ts",
+      "src/functions/order/confirmOrder/handler.ts",
+      "src/functions/order/createOrder/handler.ts",
+      "src/functions/order/downloadOrderInvoice/handler.ts",
+      "src/functions/order/getOrder/handler.ts",
+      "src/functions/order/getOrderInvoice/handler.ts",
+      "src/functions/order/getOrderItems/handler.ts",
+      "src/functions/order/getOrderTimeline/handler.ts",
+      "src/functions/order/listOrders/handler.ts",
+      "src/functions/order/reorder/handler.ts",
+      "src/functions/order/updateOrderStatus/handler.ts",
+      "src/functions/payment/addPaymentMethod/handler.ts",
+      "src/functions/payment/capturePayment/handler.ts",
+      "src/functions/payment/createPayment/handler.ts",
+      "src/functions/payment/deletePaymentMethod/handler.ts",
+      "src/functions/payment/getPayment/handler.ts",
+      "src/functions/payment/getPaymentMethods/handler.ts",
+      "src/functions/payment/listPayments/handler.ts",
+      "src/functions/payment/refundPayment/handler.ts",
+      "src/functions/payment/setDefaultPaymentMethod/handler.ts",
+      "src/functions/payment/webhookPayment/handler.ts",
+      "src/functions/product/createProduct/handler.ts",
+      "src/functions/product/createProductVariant/handler.ts",
+      "src/functions/product/deleteProduct/handler.ts",
+      "src/functions/product/deleteProductVariant/handler.ts",
+      "src/functions/product/getFeaturedProducts/handler.ts",
+      "src/functions/product/getProduct/handler.ts",
+      "src/functions/product/getProductImages/handler.ts",
+      "src/functions/product/getProductStock/handler.ts",
+      "src/functions/product/getProductVariants/handler.ts",
+      "src/functions/product/getProducts/handler.ts",
+      "src/functions/product/getRelatedProducts/handler.ts",
+      "src/functions/product/publishProduct/handler.ts",
+      "src/functions/product/searchProducts/handler.ts",
+      "src/functions/product/unpublishProduct/handler.ts",
+      "src/functions/product/updateProduct/handler.ts",
+      "src/functions/product/updateProductVariant/handler.ts",
+      "src/functions/product/uploadProductImage/handler.ts",
+      "src/functions/review/approveReview/handler.ts",
+      "src/functions/review/createReview/handler.ts",
+      "src/functions/review/deleteReview/handler.ts",
+      "src/functions/review/getProductReviews/handler.ts",
+      "src/functions/review/getReview/handler.ts",
+      "src/functions/review/getReviewStats/handler.ts",
+      "src/functions/review/listReviews/handler.ts",
+      "src/functions/review/reportReview/handler.ts",
+      "src/functions/review/updateReview/handler.ts",
+      "src/functions/shipping/calculateShipping/handler.ts",
+      "src/functions/shipping/cancelShipment/handler.ts",
+      "src/functions/shipping/createShipment/handler.ts",
+      "src/functions/shipping/createShippingZone/handler.ts",
+      "src/functions/shipping/getShipment/handler.ts",
+      "src/functions/shipping/getShippingMethod/handler.ts",
+      "src/functions/shipping/listShippingMethods/handler.ts",
+      "src/functions/shipping/listShippingZones/handler.ts",
+      "src/functions/shipping/trackShipment/handler.ts",
+      "src/functions/shipping/updateShipment/handler.ts",
+      "src/functions/wishlist/addToWishlist/handler.ts",
+      "src/functions/wishlist/clearWishlist/handler.ts",
+      "src/functions/wishlist/getWishlist/handler.ts",
+      "src/functions/wishlist/getWishlistCount/handler.ts",
+      "src/functions/wishlist/moveWishlistToCart/handler.ts",
+      "src/functions/wishlist/removeFromWishlist/handler.ts",
+      "src/services/address/createAddress.ts",
+      "src/services/address/deleteAddress.ts",
+      "src/services/address/getAddress.ts",
+      "src/services/address/listAddresses.ts",
+      "src/services/address/setDefaultAddress.ts",
+      "src/services/address/updateAddress.ts",
+      "src/services/address/validateAddress.ts",
+      "src/services/auth/changePassword.ts",
+      "src/services/auth/disable2fa.ts",
+      "src/services/auth/enable2fa.ts",
+      "src/services/auth/forgotPassword.ts",
+      "src/services/auth/getMe.ts",
+      "src/services/auth/getSessions.ts",
+      "src/services/auth/login.ts",
+      "src/services/auth/logout.ts",
+      "src/services/auth/refreshToken.ts",
+      "src/services/auth/register.ts",
+      "src/services/auth/resetPassword.ts",
+      "src/services/auth/revokeSession.ts",
+      "src/services/auth/socialLogin.ts",
+      "src/services/auth/verify2fa.ts",
+      "src/services/auth/verifyEmail.ts",
+      "src/services/cart/addToCart.ts",
+      "src/services/cart/applyCartCoupon.ts",
+      "src/services/cart/clearCart.ts",
+      "src/services/cart/getCart.ts",
+      "src/services/cart/getCartTotals.ts",
+      "src/services/cart/getSavedItems.ts",
+      "src/services/cart/mergeCart.ts",
+      "src/services/cart/removeCartCoupon.ts",
+      "src/services/cart/removeCartItem.ts",
+      "src/services/cart/saveForLater.ts",
+      "src/services/cart/updateCartItem.ts",
+      "src/services/category/createCategory.ts",
+      "src/services/category/createSubcategory.ts",
+      "src/services/category/deleteCategory.ts",
+      "src/services/category/getCategory.ts",
+      "src/services/category/getCategoryProducts.ts",
+      "src/services/category/listCategories.ts",
+      "src/services/category/listSubcategories.ts",
+      "src/services/category/moveCategory.ts",
+      "src/services/category/updateCategory.ts",
+      "src/services/checkout/applyCheckoutGiftCard.ts",
+      "src/services/checkout/getCheckout.ts",
+      "src/services/checkout/getCheckoutSummary.ts",
+      "src/services/checkout/placeOrder.ts",
+      "src/services/checkout/setCheckoutPayment.ts",
+      "src/services/checkout/setCheckoutShipping.ts",
+      "src/services/checkout/startCheckout.ts",
+      "src/services/checkout/updateCheckout.ts",
+      "src/services/checkout/validateCheckout.ts",
+      "src/services/coupon/applyCoupon.ts",
+      "src/services/coupon/createCoupon.ts",
+      "src/services/coupon/deleteCoupon.ts",
+      "src/services/coupon/getCoupon.ts",
+      "src/services/coupon/getCouponUsage.ts",
+      "src/services/coupon/listCoupons.ts",
+      "src/services/coupon/updateCoupon.ts",
+      "src/services/coupon/validateCoupon.ts",
+      "src/services/customer/deactivateCustomer.ts",
+      "src/services/customer/deleteCustomer.ts",
+      "src/services/customer/getCustomer.ts",
+      "src/services/customer/getCustomerAddresses.ts",
+      "src/services/customer/getCustomerOrders.ts",
+      "src/services/customer/getCustomerProfile.ts",
+      "src/services/customer/listCustomers.ts",
+      "src/services/customer/updateCustomer.ts",
+      "src/services/customer/updateCustomerPreferences.ts",
+      "src/services/inventory/adjustInventory.ts",
+      "src/services/inventory/getInventory.ts",
+      "src/services/inventory/getInventoryHistory.ts",
+      "src/services/inventory/getWarehouseStock.ts",
+      "src/services/inventory/listLowStock.ts",
+      "src/services/inventory/releaseStock.ts",
+      "src/services/inventory/reserveStock.ts",
+      "src/services/inventory/syncInventory.ts",
+      "src/services/inventory/updateInventory.ts",
+      "src/services/order/cancelOrder.ts",
+      "src/services/order/confirmOrder.ts",
+      "src/services/order/createOrder.ts",
+      "src/services/order/downloadOrderInvoice.ts",
+      "src/services/order/getOrder.ts",
+      "src/services/order/getOrderInvoice.ts",
+      "src/services/order/getOrderItems.ts",
+      "src/services/order/getOrderTimeline.ts",
+      "src/services/order/listOrders.ts",
+      "src/services/order/reorder.ts",
+      "src/services/order/updateOrderStatus.ts",
+      "src/services/payment/addPaymentMethod.ts",
+      "src/services/payment/capturePayment.ts",
+      "src/services/payment/createPayment.ts",
+      "src/services/payment/deletePaymentMethod.ts",
+      "src/services/payment/getPayment.ts",
+      "src/services/payment/getPaymentMethods.ts",
+      "src/services/payment/listPayments.ts",
+      "src/services/payment/refundPayment.ts",
+      "src/services/payment/setDefaultPaymentMethod.ts",
+      "src/services/payment/webhookPayment.ts",
+      "src/services/product/createProduct.ts",
+      "src/services/product/createProductVariant.ts",
+      "src/services/product/deleteProduct.ts",
+      "src/services/product/deleteProductVariant.ts",
+      "src/services/product/getFeaturedProducts.ts",
+      "src/services/product/getProduct.ts",
+      "src/services/product/getProductImages.ts",
+      "src/services/product/getProductStock.ts",
+      "src/services/product/getProductVariants.ts",
+      "src/services/product/getProducts.ts",
+      "src/services/product/getRelatedProducts.ts",
+      "src/services/product/publishProduct.ts",
+      "src/services/product/searchProducts.ts",
+      "src/services/product/unpublishProduct.ts",
+      "src/services/product/updateProduct.ts",
+      "src/services/product/updateProductVariant.ts",
+      "src/services/product/uploadProductImage.ts",
+      "src/services/review/approveReview.ts",
+      "src/services/review/createReview.ts",
+      "src/services/review/deleteReview.ts",
+      "src/services/review/getProductReviews.ts",
+      "src/services/review/getReview.ts",
+      "src/services/review/getReviewStats.ts",
+      "src/services/review/listReviews.ts",
+      "src/services/review/reportReview.ts",
+      "src/services/review/updateReview.ts",
+      "src/services/shipping/calculateShipping.ts",
+      "src/services/shipping/cancelShipment.ts",
+      "src/services/shipping/createShipment.ts",
+      "src/services/shipping/createShippingZone.ts",
+      "src/services/shipping/getShipment.ts",
+      "src/services/shipping/getShippingMethod.ts",
+      "src/services/shipping/listShippingMethods.ts",
+      "src/services/shipping/listShippingZones.ts",
+      "src/services/shipping/trackShipment.ts",
+      "src/services/shipping/updateShipment.ts",
+      "src/services/wishlist/addToWishlist.ts",
+      "src/services/wishlist/clearWishlist.ts",
+      "src/services/wishlist/getWishlist.ts",
+      "src/services/wishlist/getWishlistCount.ts",
+      "src/services/wishlist/moveWishlistToCart.ts",
+      "src/services/wishlist/removeFromWishlist.ts",
+      "src/shared/db.ts",
+      "src/shared/nodejs/logger.d.ts",
+      "src/shared/nodejs/logger.js",
+      "template.yaml",
+      "templates/address.yaml",
+      "templates/auth.yaml",
+      "templates/cart.yaml",
+      "templates/category.yaml",
+      "templates/checkout.yaml",
+      "templates/coupon.yaml",
+      "templates/customer.yaml",
+      "templates/inventory.yaml",
+      "templates/order.yaml",
+      "templates/payment.yaml",
+      "templates/product.yaml",
+      "templates/review.yaml",
+      "templates/shipping.yaml",
+      "templates/wishlist.yaml",
+      "tsconfig.json"
+    ]
+  }
+}

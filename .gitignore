@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.aws-sam/
+.slskit-local.yaml
+.DS_Store
+*.log
+config.bat

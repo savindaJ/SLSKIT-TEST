@@ -1,0 +1,168 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: test-cli root stack
+
+Parameters:
+  AppEnvironment:
+    Type: String
+    Default: dev
+    Description: Deployment environment; every stage-scoped resource name is built from it
+  EnvDatabaseUrl:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: DATABASE_URL environment variable
+
+Resources:
+  SharedHttpApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub "test-cli-${AppEnvironment}"
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - "*"
+        AllowOrigins:
+          - "*"
+
+  SharedHttpApiStage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref SharedHttpApi
+      StageName: $default
+      AutoDeploy: true
+
+  AuthStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/auth.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  ProductStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/product.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  CategoryStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/category.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  CartStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/cart.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  OrderStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/order.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  CheckoutStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/checkout.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  CustomerStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/customer.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  InventoryStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/inventory.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  ReviewStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/review.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  PaymentStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/payment.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  ShippingStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/shipping.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  CouponStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/coupon.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  WishlistStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/wishlist.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+  AddressStack:
+    Type: AWS::Serverless::Application
+    Properties:
+      Location: templates/address.yaml
+      Parameters:
+        AppEnvironment: !Ref AppEnvironment
+        EnvDatabaseUrl: !Ref EnvDatabaseUrl
+        HttpApiId: !Ref SharedHttpApi
+
+Outputs:
+  ApiUrl:
+    Description: HTTP API URL for every service in this project
+    Value: !Sub https://${SharedHttpApi}.execute-api.${AWS::Region}.amazonaws.com
